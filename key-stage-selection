@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment Insights - Select Key Stage</title>
+
+  <!-- Use the same Google Font for consistency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    /* Page background & font reset */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #29539B 30%, #1f3b4d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    /* Container (card) styling */
+    .container {
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      margin: 20px;
+    }
+
+    h1 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* Button styling */
+    button {
+      background-color: #FFD700;
+      color: #333;
+      border: none;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 15px 25px;
+      cursor: pointer;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      margin: 10px;
+    }
+
+    button:hover {
+      background-color: #ffcf33;
+      transform: translateY(-2px);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Select Your Key Stage</h1>
+    <p>Please choose from the options below:</p>
+    <button onclick="selectKeyStage('KS3')">KS3 (Year 7, 8 &amp; 9)</button>
+    <button onclick="selectKeyStage('KS4')">KS4 (GCSE)</button>
+    <button onclick="selectKeyStage('KS5')">KS5 (A-Level &amp; IB)</button>
+  </div>
+
+  <script>
+    function selectKeyStage(ks) {
+      // Optionally store the chosen Key Stage if needed
+      localStorage.setItem('selectedKeyStage', ks);
+
+      // Redirect to a different page based on key stage
+      switch (ks) {
+        case 'KS3':
+          window.location.href = 'ks3-subjects.html';
+          break;
+        case 'KS4':
+          window.location.href = 'ks4-subjects.html';
+          break;
+        case 'KS5':
+          window.location.href = 'ks5-subjects.html';
+          break;
+        default:
+          // Fallback behavior (optional)
+          alert('Key Stage not recognized!');
+      }
+    }
+  </script>
+
+</body>
+</html>
+
