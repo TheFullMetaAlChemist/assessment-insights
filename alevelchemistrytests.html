@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Assessment Insights - A-Level Chemistry Tests</title>
+
+  <!-- Same Google Font for consistency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link 
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" 
+    rel="stylesheet"
+  >
+
+  <style>
+    /* Page background & font reset */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #29539B 30%, #1f3b4d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    /* Container (card) styling */
+    .container {
+      background-color: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 1200px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      margin: 20px;
+    }
+
+    h1 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    p {
+      margin-bottom: 1.2rem;
+      line-height: 1.5;
+    }
+
+    /* Two-column layout for Year 12 and Year 13 */
+    .year-sections {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .year-column {
+      flex: 1;
+      min-width: 300px;
+      max-width: 500px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .year-column h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      text-decoration: underline;
+    }
+
+    .year-column h3 {
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Styling for the lists */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+      line-height: 1.4;
+    }
+
+    /* Styling for links */
+    a {
+      color: #FFD700;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover {
+      color: #ffcf33;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>A-Level Chemistry Tests</h1>
+    <p>Select a test from the links below. Year 12 Assessments on the left, Year 13 Assessments on the right.</p>
+
+    <div class="year-sections">
+      <!-- Year 12 Column -->
+      <div class="year-column">
+        <h2>Year 12 Assessments</h2>
+
+        <!-- Baseline Test at the top -->
+        <ul>
+          <li><a href="y12-baseline-test.html">Year 12 Baseline Test</a></li>
+        </ul>
+
+        <!-- Module 1 -->
+        <h3>Module 1: Development of Practical Skills</h3>
+        <ul>
+          <li><a href="module1-practical.html">1. Development of Practical Skills in Chemistry</a></li>
+        </ul>
+
+        <!-- Module 2 -->
+        <h3>Module 2: Foundations in Chemistry</h3>
+        <ul>
+          <li><a href="module2-atoms-ions.html">2. Atoms, Ions, and Compounds</a></li>
+          <li><a href="module2-amount-of-substance.html">3. Amount of Substance</a></li>
+          <li><a href="module2-acids-redox.html">4. Acids and Redox</a></li>
+          <li><a href="module2-electrons-bonding.html">5. Electrons and Bonding</a></li>
+          <li><a href="module2-shapes-intermolecular.html">6. Shapes of Molecules &amp; Intermolecular Forces</a></li>
+        </ul>
+
+        <!-- Module 3 -->
+        <h3>Module 3: Periodic Table &amp; Energy</h3>
+        <ul>
+          <li><a href="module3-periodicity.html">7. Periodicity</a></li>
+          <li><a href="module3-reactivity-trends.html">8. Reactivity Trends</a></li>
+          <li><a href="module3-enthalpy.html">9. Enthalpy</a></li>
+          <li><a href="module3-rates-equilibrium.html">10. Reaction Rates &amp; Equilibrium</a></li>
+        </ul>
+
+        <!-- New heading for Additional Assessments -->
+        <h3>Additional Assessments</h3>
+        <ul>
+          <li><a href="y12-mock-exam.html">Year 12 Mock Exam</a></li>
+          <li><a href="y12-midyear-assessment.html">Year 12 Mid-Year Assessment</a></li>
+        </ul>
+      </div>
+
+      <!-- Year 13 Column -->
+      <div class="year-column">
+        <h2>Year 13 Assessments</h2>
+
+        <!-- Module 4 -->
+        <h3>Module 4: Core Organic Chemistry</h3>
+        <ul>
+          <li><a href="module4-basic-organic.html">11. Basic Concepts of Organic Chemistry</a></li>
+          <li><a href="module4-alkanes.html">12. Alkanes</a></li>
+          <li><a href="module4-alkenes.html">13. Alkenes</a></li>
+          <li><a href="module4-alcohols.html">14. Alcohols</a></li>
+          <li><a href="module4-haloalkanes.html">15. Haloalkanes</a></li>
+          <li><a href="module4-organic-synthesis.html">16. Organic Synthesis</a></li>
+          <li><a href="module4-spectroscopy.html">17. Spectroscopy</a></li>
+        </ul>
+
+        <!-- Module 5 -->
+        <h3>Module 5: Physical Chemistry &amp; Transition Elements</h3>
+        <ul>
+          <li><a href="module5-rates.html">18. Rates of Reaction</a></li>
+          <li><a href="module5-equilibrium.html">19. Equilibrium</a></li>
+          <li><a href="module5-acids-bases.html">20. Acids, Bases, and pH</a></li>
+          <li><a href="module5-buffers.html">21. Buffers and Neutralisation</a></li>
+          <li><a href="module5-enthalpy-entropy.html">22. Enthalpy and Entropy</a></li>
+          <li><a href="module5-redox-electrodes.html">23. Redox and Electrode Potentials</a></li>
+          <li><a href="module5-transition-elements.html">24. Transition Elements</a></li>
+        </ul>
+
+        <!-- Module 6 -->
+        <h3>Module 6: Organic Chemistry &amp; Analysis</h3>
+        <ul>
+          <li><a href="module6-aromatic.html">25. Aromatic Chemistry</a></li>
+          <li><a href="module6-carbonyls.html">26. Carbonyls &amp; Carboxylic Acids</a></li>
+          <li><a href="module6-amines-polymers.html">27. Amines, Amino Acids, &amp; Polymers</a></li>
+          <li><a href="module6-organic-synthesis.html">28. Organic Synthesis</a></li>
+          <li><a href="module6-chromatography-spectroscopy.html">29. Chromatography &amp; Spectroscopy</a></li>
+        </ul>
+
+        <!-- New heading for Additional Assessments -->
+        <h3>Additional Assessments</h3>
+        <ul>
+          <li><a href="y13-mock-paper1.html">Year 13 Mock Paper 1</a></li>
+          <li><a href="y13-mock-paper2.html">Year 13 Mock Paper 2</a></li>
+        </ul>
+      </div>
+    </div><!-- end .year-sections -->
+  </div><!-- end .container -->
+
+</body>
+</html>
