@@ -79,6 +79,7 @@
   <div class="container">
     <h1>Select Your Subject</h1>
     <p>Please choose your subject:</p>
+    <!-- Buttons for each KS5 subject -->
     <button onclick="selectSubject('A-level Biology')">A-level Biology</button>
     <button onclick="selectSubject('A-level Chemistry')">A-level Chemistry</button>
     <button onclick="selectSubject('A-level Physics')">A-level Physics</button>
@@ -86,15 +87,27 @@
   </div>
 
   <script>
+    // This function is called when the user clicks one of the subject buttons
     function selectSubject(subject) {
-      // Optionally save the selected subject for later use.
+      // Store the selected subject (optional, for further use)
       localStorage.setItem('selectedSubject', subject);
 
-      // Only Chemistry is supported for test selection at this stage.
-      if (subject === 'Chemistry') {
-        window.location.href = 'ks5chemistrytests.html';
-      } else {
-        alert('Currently, tests are only available for Chemistry. Please select Chemistry.');
+      // Navigate to the corresponding tests page based on the selected subject
+      switch(subject) {
+        case 'A-level Biology':
+          window.location.href = 'ks5biologytests.html';
+          break;
+        case 'A-level Chemistry':
+          window.location.href = 'ks5chemistrytests.html';
+          break;
+        case 'A-level Physics':
+          window.location.href = 'ks5physicstests.html';
+          break;
+        case 'A-level Maths':
+          window.location.href = 'ks5mathstests.html';
+          break;
+        default:
+          alert('Invalid subject selection');
       }
     }
   </script>
