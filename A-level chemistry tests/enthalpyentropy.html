@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Thermochemistry and Energy Changes Test Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+    input.score-input {
+      width: 60px;
+    }
+    input.info-input {
+      width: 300px;
+      padding: 4px;
+      margin: 0 10px 10px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+    }
+    .summary-row, .ao-row {
+      padding: 8px;
+      margin: 4px 0;
+      border-radius: 4px;
+    }
+    .follow-up {
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .follow-up .part {
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .follow-up .part:first-child {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    .follow-up textarea {
+      width: 100%;
+      min-height: 80px;
+      margin-bottom: 5px;
+    }
+    .toggle-buttons {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Student Information -->
+  <header>
+    <h1>Thermochemistry and Energy Changes Test Analysis</h1>
+    <label for="studentName">Name:</label>
+    <input type="text" id="studentName" class="info-input" placeholder="Enter your name">
+    <label for="studentGrade">Grade:</label>
+    <input type="text" id="studentGrade" class="info-input" placeholder="Enter your grade">
+  </header>
+  
+  <!-- Test Questions Table with Input Fields -->
+  <section id="test-questions">
+    <h2>Test Questions</h2>
+    <table id="specTable">
+      <thead>
+        <tr>
+          <th>Question Number</th>
+          <th>Focus</th>
+          <th>Group</th>
+          <th>Marks</th>
+          <th>Your Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Each row has a data-group attribute (for grouping and follow-up questions)
+             and a data-max attribute for the maximum marks -->
+        <tr data-group="Lattice Enthalpy and Ionic Bonding" data-max="2">
+          <td>1a</td>
+          <td>Lattice enthalpy and ionic bonding</td>
+          <td>Lattice Enthalpy and Ionic Bonding</td>
+          <td>2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Entropy and Disorder" data-max="1">
+          <td>1b</td>
+          <td>Definition of entropy as disorder</td>
+          <td>Entropy and Disorder</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Periodic Table and Ionisation Energy" data-max="2">
+          <td>1c</td>
+          <td>Definition of first ionisation energy</td>
+          <td>Periodic Table and Ionisation Energy</td>
+          <td>2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Enthalpy Changes in Solution and Hydration" data-max="1">
+          <td>2a</td>
+          <td>Enthalpy of hydration</td>
+          <td>Enthalpy Changes in Solution and Hydration</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Enthalpy Changes in Solution and Hydration" data-max="1">
+          <td>2b</td>
+          <td>Enthalpy of atomisation</td>
+          <td>Enthalpy Changes in Solution and Hydration</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Enthalpy Changes in Solution and Hydration" data-max="1">
+          <td>2c</td>
+          <td>Enthalpy of solution</td>
+          <td>Enthalpy Changes in Solution and Hydration</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Lattice Enthalpy and Ionic Bonding" data-max="1">
+          <td>2d</td>
+          <td>Electron affinity</td>
+          <td>Lattice Enthalpy and Ionic Bonding</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Entropy and Disorder" data-max="2">
+          <td>3a</td>
+          <td>Entropy changes due to increasing gas molecules</td>
+          <td>Entropy and Disorder</td>
+          <td>2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Gibbs Free Energy and Feasibility" data-max="3">
+          <td>3bi</td>
+          <td>Calculation of Gibbs free energy</td>
+          <td>Gibbs Free Energy and Feasibility</td>
+          <td>3</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Gibbs Free Energy and Feasibility" data-max="3">
+          <td>3bii</td>
+          <td>Feasibility of reactions using Gibbs free energy</td>
+          <td>Gibbs Free Energy and Feasibility</td>
+          <td>3</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Born-Haber Cycles" data-max="1">
+          <td>4ai</td>
+          <td>Enthalpy of formation in Born-Haber cycles</td>
+          <td>Born-Haber Cycles</td>
+          <td>1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Born-Haber Cycles" data-max="4">
+          <td>4aii</td>
+          <td>Born-Haber cycle calculations for lattice enthalpy</td>
+          <td>Born-Haber Cycles</td>
+          <td>4</td>
+          <td><input type="number" min="0" max="4" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Born-Haber Cycles" data-max="2">
+          <td>4aiii</td>
+          <td>Calculation of lattice enthalpy</td>
+          <td>Born-Haber Cycles</td>
+          <td>2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Lattice Enthalpy and Ionic Bonding" data-max="2">
+          <td>4b</td>
+          <td>Effect of ion size and charge density on lattice enthalpy</td>
+          <td>Lattice Enthalpy and Ionic Bonding</td>
+          <td>2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Enthalpy Changes in Solution and Hydration" data-max="3">
+          <td>5ai</td>
+          <td>Energy cycles for solution enthalpy</td>
+          <td>Enthalpy Changes in Solution and Hydration</td>
+          <td>3</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Enthalpy Changes in Solution and Hydration" data-max="3">
+          <td>5aii</td>
+          <td>Hydration enthalpy calculations</td>
+          <td>Enthalpy Changes in Solution and Hydration</td>
+          <td>3</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-group="Solubility and Energetics" data-max="6">
+          <td>5b</td>
+          <td>Discussion of solubility and related enthalpy/entropy factors</td>
+          <td>Solubility and Energetics</td>
+          <td>6</td>
+          <td><input type="number" min="0" max="6" step="any" class="score-input" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="calculateScores()">Calculate</button>
+  </section>
+  
+  <!-- Performance Summary by Group (Revealed after Calculation) -->
+  <section id="performanceSummary" class="hidden">
+    <h2>Performance Summary by Group</h2>
+    <div id="summaryContainer"></div>
+  </section>
+  
+  <!-- Follow-Up Questions (Revealed after Calculation) -->
+  <section id="followUpQuestions" class="hidden">
+    <h2>Follow-Up Questions (from Weakest to Strongest Topics)</h2>
+    <div id="followUpContainer"></div>
+  </section>
+  
+  <script>
+    // Function to interpolate a pastel colour between red (low) and green (high)
+    // For 0%: pastel red (rgb(255,200,200)), for 100%: pastel green (rgb(200,255,200))
+    function getPastelColor(percentage) {
+      const r = Math.round(255 - (percentage / 100) * 55); // 255 -> 200
+      const g = Math.round(200 + (percentage / 100) * 55); // 200 -> 255
+      const b = 200; // constant
+      return `rgb(${r},${g},${b})`;
+    }
+    
+    // Follow-Up Data for each group (keys match the "data-group" attribute)
+    const followUpData = {
+      "Lattice Enthalpy and Ionic Bonding": {
+        intro: "Strengthen your understanding of lattice enthalpy and ionic bonding.",
+        parts: {
+          a: {
+            question: "Q1.1: Why is the lattice enthalpy of MgO more negative than that of NaCl?",
+            answer: "Mg²⁺ and O²⁻ ions have higher charges and are smaller in size compared to Na⁺ and Cl⁻ ions, resulting in a stronger electrostatic attraction and a more negative lattice enthalpy.",
+            hint: "Lattice enthalpy depends on ionic charge and ionic radius. Compare the size and charge of Mg²⁺ vs. Na⁺ and O²⁻ vs. Cl⁻."
+          },
+          b: {
+            question: "Q1.2: Write the equation that represents the lattice enthalpy of CaCl₂.",
+            answer: "Ca²⁺(g) + 2Cl⁻(g) → CaCl₂(s)",
+            hint: "Lattice enthalpy represents the formation of one mole of an ionic compound from its gaseous ions. Look at the formula of CaCl₂ and write an equation where the gaseous ions combine to form the solid."
+          }
+        }
+      },
+      "Entropy and Disorder": {
+        intro: "Deepen your understanding of entropy and disorder.",
+        parts: {
+          a: {
+            question: "Q2.1: Explain why the entropy of a substance increases when it changes state from solid to liquid.",
+            answer: "In the liquid state, particles move more freely, increasing disorder and the number of ways energy can be distributed, resulting in higher entropy.",
+            hint: "Entropy is a measure of disorder. A solid has a fixed structure, while a liquid has freely moving particles. Think about why liquids have more ways to arrange their particles and energy than solids."
+          },
+          b: {
+            question: "Q2.2: A reaction has a negative entropy change. Suggest how it might still be feasible.",
+            answer: "If the enthalpy change (ΔH) is sufficiently exothermic (negative) and |ΔH| > T|ΔS|, then ΔG can still be negative, making the reaction feasible.",
+            hint: "Gibbs free energy (ΔG) determines feasibility: ΔG = ΔH - TΔS. Even if ΔS is negative, a very exothermic reaction can still make ΔG negative."
+          }
+        }
+      },
+      "Periodic Table and Ionisation Energy": {
+        intro: "Review key concepts about the periodic table and ionisation energy.",
+        parts: {
+          a: {
+            question: "Q3.1: Why is the first ionisation energy of helium higher than that of hydrogen?",
+            answer: "Helium has a higher nuclear charge, resulting in a stronger attraction between the nucleus and the outer electron, which requires more energy to remove.",
+            hint: "Ionisation energy depends on nuclear charge, atomic radius, and shielding. Compare helium and hydrogen in these three factors."
+          },
+          b: {
+            question: "Q3.2: Explain why the second ionisation energy of sodium is much higher than the first.",
+            answer: "The second electron is removed from a full inner shell closer to the nucleus, where the attraction is much stronger, requiring significantly more energy.",
+            hint: "The first ionisation energy removes an electron from a neutral atom, while the second removes an electron from a positive ion. Consider the difference in the electron's environment in each case."
+          }
+        }
+      },
+      "Enthalpy Changes in Solution and Hydration": {
+        intro: "Clarify your understanding of enthalpy changes in solution and hydration.",
+        parts: {
+          a: {
+            question: "Q4.1: What is the enthalpy change of solution for NaCl if its lattice enthalpy is −780 kJ mol⁻¹ and the sum of the hydration enthalpies of Na⁺ and Cl⁻ is −783 kJ mol⁻¹?",
+            answer: "ΔH_solution = ΔH_hydration - ΔH_lattice = -783 - (-780) = -3 kJ mol⁻¹.",
+            hint: "The enthalpy of solution depends on the lattice enthalpy and the hydration enthalpy. Check the energy required to break the solid and the energy released when ions dissolve."
+          },
+          b: {
+            question: "Q4.2: Why does the hydration enthalpy decrease as the size of the ion increases?",
+            answer: "Larger ions have a lower charge density, resulting in weaker electrostatic attractions with water molecules and a less negative hydration enthalpy.",
+            hint: "Hydration enthalpy depends on ionic charge and ionic radius. Smaller, highly charged ions attract water molecules more strongly."
+          }
+        }
+      },
+      "Born-Haber Cycles": {
+        intro: "Consolidate your understanding of Born-Haber cycles.",
+        parts: {
+          a: {
+            question: "Q5.1: In a Born-Haber cycle, why is the enthalpy of atomisation an endothermic process?",
+            answer: "Energy is required to break the bonds between atoms in a substance to form gaseous atoms, making the process endothermic.",
+            hint: "Atomisation enthalpy is the energy required to break bonds in a substance. Think about why breaking bonds always requires energy."
+          },
+          b: {
+            question: "Q5.2: Calculate the lattice enthalpy of KCl using the following data: Enthalpy of formation: −438 kJ mol⁻¹, Enthalpy of atomisation (K): 89 kJ mol⁻¹, Bond dissociation enthalpy (Cl₂): 243 kJ mol⁻¹, Ionisation energy (K): 419 kJ mol⁻¹, Electron affinity (Cl): −349 kJ mol⁻¹.",
+            answer: "ΔH_lattice = ΔH_formation - ΔH_atomisation(K) - (ΔH_bond dissociation / 2) - ΔH_ionisation - ΔH_electron affinity = -438 - 89 - (243/2) - 419 - (-349) = -718.5 kJ mol⁻¹.",
+            hint: "In a Born-Haber cycle, the formation of an ionic compound involves several energy changes. Rearrange the enthalpy of formation equation to solve for lattice enthalpy."
+          }
+        }
+      },
+      "Gibbs Free Energy and Feasibility": {
+        intro: "Enhance your understanding of Gibbs free energy and reaction feasibility.",
+        parts: {
+          a: {
+            question: "Q6.1: A reaction has ΔH = −120 kJ mol⁻¹ and ΔS = −150 J K⁻¹ mol⁻¹. At what temperature will the reaction just become feasible?",
+            answer: "For ΔG = 0, T = ΔH / ΔS = (-120 × 10³) / (-150) = 800 K.",
+            hint: "A reaction is feasible when ΔG < 0. Use the equation T = ΔH / ΔS to find the temperature at which the reaction becomes feasible."
+          },
+          b: {
+            question: "Q6.2: Explain why endothermic reactions can still be feasible.",
+            answer: "If the entropy change (ΔS) is positive and the temperature is high enough, the TΔS term can outweigh the positive ΔH, resulting in a negative ΔG.",
+            hint: "Even if ΔH is positive, a large positive ΔS at high temperature can make the reaction feasible by making TΔS large enough to overcome ΔH."
+          }
+        }
+      }
+    };
+    
+    // Main function triggered by the "Calculate" button
+    function calculateScores() {
+      // --- Process Group Performance ---
+      const performance = {};
+      const rows = document.querySelectorAll("#specTable tbody tr");
+      rows.forEach(row => {
+        const group = row.getAttribute("data-group");
+        const maxMark = parseFloat(row.getAttribute("data-max"));
+        const scoreInput = row.querySelector("input.score-input");
+        const score = parseFloat(scoreInput.value) || 0;
+        if (!performance[group]) {
+          performance[group] = { obtained: 0, total: 0 };
+        }
+        performance[group].obtained += score;
+        performance[group].total += maxMark;
+      });
+      
+      // Build an array for group performance with percentages
+      const performanceArray = [];
+      for (let group in performance) {
+        const data = performance[group];
+        const percentage = (data.obtained / data.total) * 100;
+        performanceArray.push({ group: group, percentage: percentage });
+      }
+      
+      // --- Display Group Performance Summary ---
+      // Sorted descending (highest percentage first)
+      performanceArray.sort((a, b) => b.percentage - a.percentage);
+      const summaryContainer = document.getElementById("summaryContainer");
+      summaryContainer.innerHTML = "";
+      performanceArray.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "summary-row";
+        div.style.backgroundColor = getPastelColor(item.percentage);
+        div.innerHTML = `<strong>${item.group}</strong>: ${item.percentage.toFixed(2)}%`;
+        summaryContainer.appendChild(div);
+      });
+      document.getElementById("performanceSummary").classList.remove("hidden");
+      
+      // --- Build and Display Follow-Up Questions ---
+      // Sort group performance in ascending order (weakest topics first)
+      const followUpArray = performanceArray.slice().sort((a, b) => a.percentage - b.percentage);
+      const followUpContainer = document.getElementById("followUpContainer");
+      followUpContainer.innerHTML = "";
+      followUpArray.forEach(item => {
+        if (followUpData[item.group]) {
+          const data = followUpData[item.group];
+          // Create a container div for the follow-up question block for this group
+          const block = document.createElement("div");
+          block.className = "follow-up";
+          block.style.borderLeft = `6px solid ${getPastelColor(item.percentage)}`;
+          let innerHTML = `<h3>${item.group} (Performance: ${item.percentage.toFixed(2)}%)</h3>`;
+          // Include the introductory context before the parts
+          innerHTML += `<p><em>${data.intro}</em></p>`;
+          // For each part (a, b, etc.) generate a sub-section
+          const parts = data.parts;
+          for (let part in parts) {
+            const partData = parts[part];
+            innerHTML += `<div class="part">
+              <p><strong>${part})</strong> ${partData.question}</p>
+              <textarea placeholder="Type your answer here..."></textarea>
+              <div class="toggle-buttons">
+                <button onclick="toggleSubDisplay(this, 'hint', '${item.group}', '${part}')">Show Hint</button>
+                <button onclick="toggleSubDisplay(this, 'answer', '${item.group}', '${part}')">Show Answer</button>
+              </div>
+              <div id="sub-hint-${item.group}-${part}" class="hidden">${partData.hint}</div>
+              <div id="sub-answer-${item.group}-${part}" class="hidden">${partData.answer}</div>
+            </div>`;
+          }
+          block.innerHTML = innerHTML;
+          followUpContainer.appendChild(block);
+        }
+      });
+      document.getElementById("followUpQuestions").classList.remove("hidden");
+    }
+    
+    // Toggle function for sub-question hint/answer display.
+    function toggleSubDisplay(button, type, group, part) {
+      const element = document.getElementById(`sub-${type}-${group}-${part}`);
+      element.classList.toggle("hidden");
+      if (element.classList.contains("hidden")) {
+        button.textContent = type === "hint" ? "Show Hint" : "Show Answer";
+      } else {
+        button.textContent = type === "hint" ? "Hide Hint" : "Hide Answer";
+      }
+    }
+  </script>
+</body>
+</html>
+
