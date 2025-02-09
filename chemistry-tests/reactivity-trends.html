@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Reactivity Series & the Reactions of Acids Test Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #333;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: left;
+    }
+    input.score-input {
+      width: 60px;
+    }
+    input.info-input {
+      width: 300px;
+      padding: 4px;
+      margin: 0 10px 10px 0;
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      margin: 5px 5px 5px 0;
+      cursor: pointer;
+    }
+    .summary-row, .ao-row {
+      padding: 8px;
+      margin: 4px 0;
+      border-radius: 4px;
+    }
+    .follow-up {
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+    .follow-up .part {
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      margin-top: 8px;
+    }
+    .follow-up .part:first-child {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    .follow-up textarea {
+      width: 100%;
+      min-height: 80px;
+      margin-bottom: 5px;
+    }
+    .toggle-buttons {
+      margin-bottom: 10px;
+    }
+    #nextFollowUpButton {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Student Information -->
+  <header>
+    <h1>The Reactivity Series & the Reactions of Acids Test Analysis</h1>
+    <label for="studentName">Name:</label>
+    <input type="text" id="studentName" class="info-input" placeholder="Enter your name">
+    <label for="studentGrade">Grade:</label>
+    <input type="text" id="studentGrade" class="info-input" placeholder="Enter your grade">
+  </header>
+  
+  <!-- Specification Points Table with Input Fields -->
+  <section id="specification-points">
+    <h2>Specification Points</h2>
+    <table id="specTable">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Specification Point</th>
+          <th>Marks</th>
+          <th>Assessment Objective</th>
+          <th>Your Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Each row includes data-spec-code, data-max, and data-ao -->
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>01.1</td>
+          <td>C4.2.2 - Acids, bases, and salts</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>01.2</td>
+          <td>C4.2.2 - Neutralisation reactions</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="2" data-ao="AO2">
+          <td>01.3</td>
+          <td>C4.2.2 - Acids, bases, and salts</td>
+          <td>2</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.3" data-max="6" data-ao="AO1">
+          <td>01.4</td>
+          <td>C4.2.3 - Practical methods to produce salts</td>
+          <td>6</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="6" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.2" data-max="1" data-ao="AO1">
+          <td>02.1</td>
+          <td>WS 2.2 - Variables in experiments</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.2" data-max="1" data-ao="AO2">
+          <td>02.2</td>
+          <td>WS 2.2 - Identifying independent variables</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="3" data-ao="AO2">
+          <td>02.3</td>
+          <td>C4.1.2 - Displacement reactions and reactivity</td>
+          <td>3</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="2" data-ao="AO3">
+          <td>02.4</td>
+          <td>C4.1.2 - Order of reactivity</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.4" data-max="2" data-ao="AO3">
+          <td>02.5</td>
+          <td>C4.1.4 - Limitations in experimental results</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.7" data-max="2" data-ao="AO3">
+          <td>02.6</td>
+          <td>WS 2.7 - Improving experimental accuracy</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.3" data-max="1" data-ao="AO2">
+          <td>02.7</td>
+          <td>C4.2.3 - Reactivity of metals with acids</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="1" data-ao="AO3">
+          <td>02.8</td>
+          <td>C4.1.2 - Reactivity of group 1 metals</td>
+          <td>1</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.4" data-max="2" data-ao="AO2">
+          <td>02.9</td>
+          <td>C4.1.4 - Oxidation and reduction in terms of electrons</td>
+          <td>2</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>03.1</td>
+          <td>C4.2.2 - Definition of alkalis</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.6" data-max="1" data-ao="AO2">
+          <td>03.2</td>
+          <td>C4.2.6 - pH scale and concentration of hydrogen ions</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.6" data-max="3" data-ao="AO1">
+          <td>03.3</td>
+          <td>C4.2.6 - Strength of acids and ionisation</td>
+          <td>3</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="calculateScores()">Calculate</button>
+  </section>
+  
+  <!-- Performance Summary by Specification (Revealed after Calculation) -->
+  <section id="performanceSummary" class="hidden">
+    <h2>Performance Summary by Specification</h2>
+    <div id="summaryContainer"></div>
+  </section>
+  
+  <!-- Assessment Objectives Summary -->
+  <section id="aoSummary" class="hidden">
+    <h2>Performance Summary by Assessment Objective</h2>
+    <div id="aoContainer"></div>
+  </section>
+  
+  <!-- Follow-Up Questions (Revealed after Calculation) -->
+  <section id="followUpQuestions" class="hidden">
+    <h2>Follow-Up Questions (from Weakest to Strongest Topics)</h2>
+    <div id="followUpContainer"></div>
+  </section>
+  
+  <script>
+    // Mapping of specification codes to subject content descriptors
+    const specDescriptors = {
+      "C4.2.2": "Acids, bases, neutralisation reactions, and definition of alkalis.",
+      "C4.2.3": "Practical methods to produce salts and reactivity of metals with acids.",
+      "WS 2.2": "Variables in experiments and identification of independent variables.",
+      "C4.1.2": "Displacement reactions, order of reactivity, and reactivity of group 1 metals.",
+      "C4.1.4": "Limitations in experimental results and oxidation-reduction reactions.",
+      "WS 2.7": "Improving experimental accuracy.",
+      "C4.2.6": "pH scale, hydrogen ion concentration, and strength of acids."
+    };
+
+    // Follow-Up Data with introductory context (the original follow-up question context)
+    const followUpData = {
+      "C4.2.2": {
+        intro: "A student wants to make sodium sulfate crystals using sulfuric acid and sodium hydroxide.",
+        parts: {
+          a: {
+            question: "Write the balanced symbol equation for the reaction.",
+            answer: "H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O",
+            hint: "Recall the neutralisation reaction between sulfuric acid and sodium hydroxide. Write the correct chemical formulas and ensure the equation is balanced (same number of each atom on both sides)."
+          },
+          b: {
+            question: "Explain why an indicator is used in this reaction.",
+            answer: "An indicator is used because both the acid and the base are colourless; it changes colour at the endpoint of the titration, indicating that neutralisation is complete.",
+            hint: "Consider how, in a colourless solution, it is difficult to detect the endpoint. An indicator provides a visual cue when neutralisation is complete."
+          },
+          c: {
+            question: "Describe how the student could obtain pure, dry crystals of sodium sulfate from the reaction mixture.",
+            answer: "The student should titrate with an indicator to determine the endpoint, then repeat the reaction without the indicator using the correct volumes, gently heat the solution to evaporate water, allow it to cool for crystallisation, and finally filter and dry the crystals.",
+            hint: "Review the process of crystallisation: titration for precision, evaporation to remove water, cooling for crystal formation, and filtration/drying to purify the crystals."
+          }
+        }
+      },
+      "C4.2.3": {
+        intro: "A student reacts magnesium carbonate with hydrochloric acid to make magnesium chloride.",
+        parts: {
+          a: {
+            question: "Write a word equation for the reaction.",
+            answer: "Magnesium carbonate + Hydrochloric acid → Magnesium chloride + Water + Carbon dioxide",
+            hint: "List the reactants and products in words. Remember that carbonate reactions yield water and carbon dioxide."
+          },
+          b: {
+            question: "What gas is produced, and how could you test for it?",
+            answer: "Carbon dioxide (CO₂) is produced; it can be tested by passing the gas through limewater, which turns cloudy due to the formation of calcium carbonate.",
+            hint: "Carbonate-acid reactions produce CO₂. The classic test is to bubble the gas through limewater and observe if it turns milky."
+          },
+          c: {
+            question: "Explain why excess magnesium carbonate is added and describe the steps to obtain dry magnesium chloride crystals.",
+            answer: "Excess magnesium carbonate is added to ensure that all the hydrochloric acid reacts. The procedure involves filtering out unreacted carbonate, gently heating the filtrate to evaporate water, allowing crystallisation, and then filtering and drying the crystals.",
+            hint: "Consider why complete reaction is important to avoid residual acid. List the purification steps: filtration, evaporation, crystallisation, and drying."
+          }
+        }
+      },
+      "C4.1.4": {
+        intro: "A student adds a piece of magnesium to solutions of different metal sulfates and records the results.",
+        parts: {
+          a: {
+            question: "Explain why a reaction occurs between magnesium and copper sulfate but not with magnesium and zinc sulfate.",
+            answer: "Magnesium is more reactive than copper, so it displaces copper from copper sulfate; however, magnesium is less reactive than zinc, so no reaction occurs with zinc sulfate.",
+            hint: "Review the reactivity series. A metal will only displace another if it is more reactive. Compare the positions of magnesium, copper, and zinc."
+          },
+          b: {
+            question: "Write a balanced symbol equation for the reaction between magnesium and copper sulfate (include state symbols).",
+            answer: "Mg(s) + CuSO₄(aq) → Cu(s) + MgSO₄(aq)",
+            hint: "Include the physical states: (s) for solids and (aq) for aqueous solutions. Balance the equation correctly."
+          },
+          c: {
+            question: "Predict what would happen if iron was added to copper sulfate solution, and explain your answer.",
+            answer: "Iron would displace copper from copper sulfate, forming iron sulfate and depositing copper.",
+            hint: "Consider the reactivity of iron relative to copper. If iron is more reactive than copper, it will replace it in the solution."
+          }
+        }
+      },
+      "C4.2.6": {
+        intro: "A student measures the pH of two acid solutions: Hydrochloric acid (pH = 1) and ethanoic acid (pH = 3).",
+        parts: {
+          a: {
+            question: "Explain why the pH values differ despite both acids having the same concentration.",
+            answer: "HCl is a strong acid that completely ionizes, producing a high concentration of H⁺ ions (pH 1), while ethanoic acid is a weak acid that only partially ionizes, resulting in a higher pH (pH 3).",
+            hint: "Recall the difference in ionization between strong and weak acids. Full ionization of HCl yields more hydrogen ions compared to the partial ionization of ethanoic acid."
+          },
+          b: {
+            question: "Which acid is strong and which is weak?",
+            answer: "Hydrochloric acid (HCl) is strong; ethanoic acid (CH₃COOH) is weak.",
+            hint: "Based on the ionization properties, determine which acid releases more H⁺ ions in solution."
+          },
+          c: {
+            question: "Predict what happens to the pH when ethanoic acid is diluted with distilled water and explain why.",
+            answer: "Dilution decreases the concentration of H⁺ ions, so the pH increases (becomes less acidic).",
+            hint: "Consider that lowering the concentration of the acid (and thus the H⁺ ions) shifts the pH closer to neutral."
+          }
+        }
+      },
+      "WS 2.2": {
+        intro: "A student investigates how temperature affects the rate of reaction between sodium thiosulfate and hydrochloric acid.",
+        parts: {
+          a: {
+            question: "Identify the independent variable, the dependent variable, and one control variable.",
+            answer: "Independent variable: Temperature; Dependent variable: Time taken for the solution to turn cloudy; Control variable: Volume/concentration of reactants.",
+            hint: "Differentiate between what is changed, what is measured, and what must remain constant in the experiment."
+          },
+          b: {
+            question: "Explain why repeating the experiment and calculating a mean improves accuracy.",
+            answer: "Repeating the experiment reduces random errors and increases the reliability and accuracy of the results by averaging out anomalies.",
+            hint: "Consider how multiple trials can minimize the impact of outliers and improve overall accuracy."
+          },
+          c: {
+            question: "Describe how the student could ensure a fair test in this investigation.",
+            answer: "The student should keep all conditions constant except the independent variable (temperature), use the same equipment and procedure for every trial, and control any extraneous variables.",
+            hint: "Focus on the importance of standardization and control in experimental design."
+          }
+        }
+      }
+    };
+
+    // Function to interpolate a pastel colour between red (low) and green (high)
+    // For 0%: pastel red (rgb(255,200,200)), for 100%: pastel green (rgb(200,255,200))
+    function getPastelColor(percentage) {
+      const r = Math.round(255 - (percentage / 100) * 55); // 255 -> 200
+      const g = Math.round(200 + (percentage / 100) * 55); // 200 -> 255
+      const b = 200; // constant
+      return `rgb(${r},${g},${b})`;
+    }
+
+    // Main function triggered by the "Calculate" button
+    function calculateScores() {
+      // --- Process Specification Performance ---
+      const performance = {};
+      const rows = document.querySelectorAll("#specTable tbody tr");
+      rows.forEach(row => {
+        const specCode = row.getAttribute("data-spec-code");
+        const maxMark = parseFloat(row.getAttribute("data-max"));
+        const scoreInput = row.querySelector("input.score-input");
+        const score = parseFloat(scoreInput.value) || 0;
+        if (!performance[specCode]) {
+          performance[specCode] = { obtained: 0, total: 0 };
+        }
+        performance[specCode].obtained += score;
+        performance[specCode].total += maxMark;
+      });
+      
+      // Build an array for specification performance with percentages
+      const performanceArray = [];
+      for (let spec in performance) {
+        const data = performance[spec];
+        const percentage = (data.obtained / data.total) * 100;
+        performanceArray.push({ specCode: spec, percentage: percentage });
+      }
+      
+      // --- Display Specification Performance Summary ---
+      // Sorted descending (highest percentage first)
+      performanceArray.sort((a, b) => b.percentage - a.percentage);
+      const summaryContainer = document.getElementById("summaryContainer");
+      summaryContainer.innerHTML = "";
+      performanceArray.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "summary-row";
+        div.style.backgroundColor = getPastelColor(item.percentage);
+        const descriptor = specDescriptors[item.specCode] || "";
+        div.innerHTML = `<strong>${item.specCode}</strong>: ${item.percentage.toFixed(2)}%<br>
+          <small>${descriptor}</small>`;
+        summaryContainer.appendChild(div);
+      });
+      document.getElementById("performanceSummary").classList.remove("hidden");
+      
+      // --- Process Assessment Objective (AO) Performance ---
+      const aoPerformance = {};
+      rows.forEach(row => {
+        const ao = row.getAttribute("data-ao");
+        const maxMark = parseFloat(row.getAttribute("data-max"));
+        const scoreInput = row.querySelector("input.score-input");
+        const score = parseFloat(scoreInput.value) || 0;
+        if (!aoPerformance[ao]) {
+          aoPerformance[ao] = { obtained: 0, total: 0 };
+        }
+        aoPerformance[ao].obtained += score;
+        aoPerformance[ao].total += maxMark;
+      });
+      
+      // Build an array for AO performance in the order AO1, AO2, AO3
+      const aoOrder = ["AO1", "AO2", "AO3"];
+      const aoArray = [];
+      aoOrder.forEach(ao => {
+        if (aoPerformance[ao]) {
+          const data = aoPerformance[ao];
+          const percentage = (data.obtained / data.total) * 100;
+          aoArray.push({ ao: ao, percentage: percentage });
+        }
+      });
+      
+      // --- Display AO Performance Summary in a Table ---
+      const aoContainer = document.getElementById("aoContainer");
+      let aoHTML = `<table>
+        <thead>
+          <tr>
+            <th>Assessment Objective</th>
+            <th>Descriptor</th>
+            <th>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>`;
+      aoArray.forEach(item => {
+        let aoDescriptor = "";
+        if(item.ao === "AO1") { 
+          aoDescriptor = "Recall and Knowledge (e.g. definitions, descriptions)"; 
+        } else if(item.ao === "AO2") { 
+          aoDescriptor = "Application and Understanding (e.g. writing equations, explanations)"; 
+        } else if(item.ao === "AO3") { 
+          aoDescriptor = "Analysis and Evaluation (e.g. comparisons, justifications)"; 
+        }
+        
+        aoHTML += `<tr class="ao-row" style="background-color: ${getPastelColor(item.percentage)}">
+          <td>${item.ao}</td>
+          <td>${aoDescriptor}</td>
+          <td>${item.percentage.toFixed(2)}%</td>
+        </tr>`;
+      });
+      aoHTML += `</tbody></table>`;
+      aoContainer.innerHTML = aoHTML;
+      document.getElementById("aoSummary").classList.remove("hidden");
+
+      // --- Build and Display Follow-Up Questions ---
+      // Sort specification performance in ascending order (weakest topics first)
+      const followUpArray = performanceArray.slice().sort((a, b) => a.percentage - b.percentage);
+      const followUpContainer = document.getElementById("followUpContainer");
+      followUpContainer.innerHTML = "";
+      
+      // Create follow-up blocks (all initially hidden except the first one)
+      followUpArray.forEach(item => {
+        if (followUpData[item.specCode]) {
+          const data = followUpData[item.specCode];
+          const block = document.createElement("div");
+          block.className = "follow-up";
+          block.style.borderLeft = `6px solid ${getPastelColor(item.percentage)}`;
+          let innerHTML = `<h3>${item.specCode} (Performance: ${item.percentage.toFixed(2)}%)</h3>`;
+          innerHTML += `<p><em>${data.intro}</em></p>`;
+          // Generate parts a), b), c)
+          const parts = data.parts;
+          for (let part in parts) {
+            const partData = parts[part];
+            innerHTML += `<div class="part">
+              <p><strong>${part})</strong> ${partData.question}</p>
+              <textarea placeholder="Type your answer here..."></textarea>
+              <div class="toggle-buttons">
+                <button onclick="toggleSubDisplay(this, 'hint', '${item.specCode}', '${part}')">Show Hint</button>
+                <button onclick="toggleSubDisplay(this, 'answer', '${item.specCode}', '${part}')">Show Answer</button>
+              </div>
+              <div id="sub-hint-${item.specCode}-${part}" class="hidden">${partData.hint}</div>
+              <div id="sub-answer-${item.specCode}-${part}" class="hidden">${partData.answer}</div>
+            </div>`;
+          }
+          block.innerHTML = innerHTML;
+          // Hide all blocks initially except the first one.
+          block.style.display = "none";
+          followUpContainer.appendChild(block);
+        }
+      });
+      
+      // If there is at least one follow-up block, show the first one.
+      const followUpBlocks = followUpContainer.getElementsByClassName("follow-up");
+      if (followUpBlocks.length > 0) {
+        // Reveal the first block.
+        followUpBlocks[0].style.display = "block";
+        // Add a "Next Follow-Up Question" button below the blocks if more remain hidden.
+        if (followUpBlocks.length > 1) {
+          const nextButton = document.createElement("button");
+          nextButton.id = "nextFollowUpButton";
+          nextButton.textContent = "Next Follow-Up Question";
+          nextButton.onclick = function() { showNextFollowUp(); };
+          followUpContainer.appendChild(nextButton);
+        }
+      }
+      document.getElementById("followUpQuestions").classList.remove("hidden");
+    }
+    
+    // Function to show the next follow-up block without hiding previous ones
+    function showNextFollowUp() {
+      const followUpContainer = document.getElementById("followUpContainer");
+      const followUpBlocks = followUpContainer.getElementsByClassName("follow-up");
+      let nextBlockFound = false;
+      // Iterate through the blocks and reveal the first one that is still hidden.
+      for (let i = 0; i < followUpBlocks.length; i++) {
+        if (followUpBlocks[i].style.display === "none") {
+          followUpBlocks[i].style.display = "block";
+          nextBlockFound = true;
+          break;
+        }
+      }
+      // If no more hidden blocks exist, hide the "Next" button.
+      if (!nextBlockFound) {
+        document.getElementById("nextFollowUpButton").style.display = "none";
+      }
+    }
+    
+    // Toggle function for sub-question hint/answer display.
+    function toggleSubDisplay(button, type, spec, part) {
+      const element = document.getElementById(`sub-${type}-${spec}-${part}`);
+      element.classList.toggle("hidden");
+      if (element.classList.contains("hidden")) {
+        button.textContent = type === "hint" ? "Show Hint" : "Show Answer";
+      } else {
+        button.textContent = type === "hint" ? "Hide Hint" : "Hide Answer";
+      }
+    }
+  </script>
+</body>
+</html>
