@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Assessment Insights - Login</title>
+  <title>Assessment Insights - Home</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -19,12 +19,22 @@
 </head>
 <body>
   <h1>Welcome to Assessment Insights</h1>
-  <p>Please sign in with your Microsoft school credentials.</p>
-  <button onclick="location.href='subjects.html'">Login/button>
+  
+  <p>
+    Assessment Insights is a tool designed to help you reflect on your recent assessments and 
+    identify your strengths and areas for improvement. By inputting your scores, you'll receive 
+    personalized feedback and follow-up questions tailored to your needs.
+  </p>
+  
+  <p>
+    Click below to navigate your way to the assessment you require insights on.
+  </p>
+  
+  <button onclick="navigateToSubjects()">Get Started</button>
 
   <script>
-    function simulateLogin() {
-      // Simulate a successful login and redirect to the subject choice page.
+    function navigateToSubjects() {
+      // Redirect to the subject choice page
       window.location.href = 'subject-choice.html';
     }
   </script>
