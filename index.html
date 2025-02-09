@@ -59,12 +59,10 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
-
     button:hover {
       background-color: #ffcf33;
       transform: translateY(-2px);
     }
-
     button:active {
       transform: translateY(0);
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -82,18 +80,15 @@
     <p>
       Click below to navigate your way to the assessment you want insights on.
     </p>
-    <!-- Note the updated function name -->
-    <button onclick="navigateTokeystageselection()">Get Started</button>
+    <!-- Updated function name without dashes -->
+    <button onclick="navigateToKeyStageSelection()">Get Started</button>
   </div>
 
   <script>
-    // Updated function name without dashes
-    function navigateToKeystageselection() {
-      // Redirect to the Key Stage Selection page
+    function navigateToKeyStageSelection() {
+      // Redirect to the keystageselection.html page (in the same folder)
       window.location.href = 'keystageselection.html';
     }
   </script>
 </body>
 </html>
-
-
