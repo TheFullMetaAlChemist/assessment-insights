@@ -90,11 +90,17 @@
       // Optionally save the selected subject for later use.
       localStorage.setItem('selectedSubject', subject);
 
-      // Only Chemistry is supported for test selection at this stage.
-      if (subject === 'Chemistry') {
+      // Redirect to the relevant page based on the subject
+      if (subject === 'GCSE Biology') {
+        window.location.href = 'ks4biologytests.html';
+      } else if (subject === 'GCSE Chemistry') {
         window.location.href = 'ks4chemistrytests.html';
+      } else if (subject === 'GCSE Physics') {
+        window.location.href = 'ks4physicstests.html';
+      } else if (subject === 'GCSE Maths') {
+        window.location.href = 'ks4mathstests.html';
       } else {
-        alert('Currently, tests are only available for Chemistry. Please select Chemistry.');
+        alert('Subject not recognized. Please select a valid subject.');
       }
     }
   </script>
