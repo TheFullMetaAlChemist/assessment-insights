@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A-Level Chemistry Complete Revision Tool</title>
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --primary-light: #e3f2fd;
+            --primary-dark: #0d47a1;
+            --secondary-color: #26a69a;
+            --secondary-light: #e0f2f1;
+            --text-color: #263238;
+            --card-bg: #ffffff;
+            --border-color: #e0e0e0;
+            --header-bg: #f5f5f5;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196f3;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: var(--text-color);
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-top: 0;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .question-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .question-table th, .question-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .question-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        .question-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .question-table tr:hover {
+            background-color: var(--primary-light);
+        }
+
+        .score-input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            text-align: center;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .score-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(30, 136, 229, 0.2);
+        }
+
+        .max-score {
+            margin-left: 5px;
+            color: #607d8b;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+        }
+
+        .btn-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        #results {
+            display: none;
+        }
+
+        /* Model answer tabs appear when shown */
+        #tabs-container {
+            display: none;
+        }
+
+        .grade-display {
+            font-size: 28px;
+            font-weight: 700;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .grade-A {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border-left: 5px solid #2e7d32;
+        }
+
+        .grade-B {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            border-left: 5px solid #1565c0;
+        }
+
+        .grade-C {
+            background-color: #e0f7fa;
+            color: #00838f;
+            border-left: 5px solid #00838f;
+        }
+
+        .grade-D {
+            background-color: #fff8e1;
+            color: #ff8f00;
+            border-left: 5px solid #ff8f00;
+        }
+
+        .grade-E {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            border-left: 5px solid #ef6c00;
+        }
+
+        .grade-U {
+            background-color: #ffebee;
+            color: #c62828;
+            border-left: 5px solid #c62828;
+        }
+
+        .summary-card {
+            background-color: var(--primary-light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .summary-card p {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .spec-table th, .spec-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+
+        .rec-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .rec-list li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .revision-suggestions {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .revision-suggestions li {
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            margin-left: 15px;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+
+        .explanation {
+            font-size: 14px;
+            color: #607d8b;
+            margin-top: 5px;
+        }
+
+        /* Tabs styling */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            background-color: #f5f5f5;
+            border: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            background-color: #e3f2fd;
+        }
+
+        .tab-btn.active {
+            background-color: white;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .model-answer {
+            background-color: #f9f9f9;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .guidance {
+            background-color: var(--secondary-light);
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .hint {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .mark-scheme {
+            margin-top: 8px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+
+        .sub-question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sub-question h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>A-Level Chemistry Complete Revision Tool: Enthalpy</h1>
+    
+    <div class="card" id="score-entry">
+        <h2>Enter Your Scores</h2>
+        <p>Input your score for each question and click "Analyse Performance" to see your results and access model answers.</p>
+        
+        <div class="section-title">
+            <h3>Question 1: Activation Energy & Enthalpy Profiles</h3>
+        </div>
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Your Score</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1(a)(i)</td>
+                    <td>Definition of activation energy</td>
+                    <td><input type="number" id="q1ai" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>1(a)(ii)</td>
+                    <td>Drawing an enthalpy profile diagram</td>
+                    <td><input type="number" id="q1aii" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>1(a)(iii)</td>
+                    <td>Calculating activation energy for reverse reaction</td>
+                    <td><input type="number" id="q1aiii" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>1(b)</td>
+                    <td>Thermite reaction and activation energy in practice</td>
+                    <td><input type="number" id="q1b" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>1(c)</td>
+                    <td>Exothermic reactions and bond breaking/making</td>
+                    <td><input type="number" id="q1c" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">
+            <h3>Question 2: Bond Enthalpies & Calculations</h3>
+        </div>
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Your Score</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2(a)</td>
+                    <td>Calculating enthalpy change using bond enthalpies</td>
+                    <td><input type="number" id="q2a" min="0" max="3" class="score-input"></td>
+                    <td class="max-score">3 marks</td>
+                </tr>
+                <tr>
+                    <td>2(b)</td>
+                    <td>Identifying exothermic/endothermic reactions</td>
+                    <td><input type="number" id="q2b" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>2(c)</td>
+                    <td>Limitations of average bond enthalpies</td>
+                    <td><input type="number" id="q2c" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>2(d)</td>
+                    <td>Standard enthalpy of combustion</td>
+                    <td><input type="number" id="q2d" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>2(e)</td>
+                    <td>Energy calculations with a specific mass</td>
+                    <td><input type="number" id="q2e" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">
+            <h3>Question 3: Neutralisation & Experimental Methods</h3>
+        </div>
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Your Score</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>3(a)</td>
+                    <td>Writing neutralisation equations</td>
+                    <td><input type="number" id="q3a" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>3(b)</td>
+                    <td>Enthalpy change of neutralisation definition</td>
+                    <td><input type="number" id="q3b" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>3(c)</td>
+                    <td>Calculating energy released in a reaction</td>
+                    <td><input type="number" id="q3c" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>3(d)</td>
+                    <td>Calculating moles of water produced</td>
+                    <td><input type="number" id="q3d" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>3(e)</td>
+                    <td>Calculating enthalpy change of neutralisation</td>
+                    <td><input type="number" id="q3e" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>3(f)</td>
+                    <td>Experimental vs theoretical values</td>
+                    <td><input type="number" id="q3f" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>3(g)</td>
+                    <td>Improvements to experimental apparatus</td>
+                    <td><input type="number" id="q3g" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">
+            <h3>Question 4: Hess's Law & Enthalpy Cycles</h3>
+        </div>
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Your Score</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>4(a)</td>
+                    <td>Limitations of direct enthalpy measurements</td>
+                    <td><input type="number" id="q4a" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>4(b)</td>
+                    <td>Enthalpy change of formation</td>
+                    <td><input type="number" id="q4b" min="0" max="2" class="score-input"></td>
+                    <td class="max-score">2 marks</td>
+                </tr>
+                <tr>
+                    <td>4(c)</td>
+                    <td>Calculating enthalpy changes using Hess's Law</td>
+                    <td><input type="number" id="q4c" min="0" max="3" class="score-input"></td>
+                    <td class="max-score">3 marks</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="section-title">
+            <h3>Question 5: Standard Conditions & Experimental Methods</h3>
+        </div>
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Topic</th>
+                    <th>Your Score</th>
+                    <th>Max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>5(a)</td>
+                    <td>Standard conditions definition</td>
+                    <td><input type="number" id="q5a" min="0" max="1" class="score-input"></td>
+                    <td class="max-score">1 mark</td>
+                </tr>
+                <tr>
+                    <td>5(b)</td>
+                    <td>Calculating enthalpy change of formation</td>
+                    <td><input type="number" id="q5b" min="0" max="3" class="score-input"></td>
+                    <td class="max-score">3 marks</td>
+                </tr>
+                <tr>
+                    <td>5(c)</td>
+                    <td>Experimental measurements for enthalpy of combustion</td>
+                    <td><input type="number" id="q5c" min="0" max="3" class="score-input"></td>
+                    <td class="max-score">3 marks</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="btn-container">
+            <button id="analyse-btn" class="btn">Analyse Performance</button>
+        </div>
+    </div>
+    
+    <div id="results" class="card">
+        <h2>Your Results</h2>
+        
+        <div id="grade-container" class="grade-display"></div>
+        
+        <div class="summary-card">
+            <p id="total-score" style="font-weight: 600;"></p>
+            <p id="percentage" style="font-weight: 600;"></p>
+            <p class="explanation">Grade boundaries: A ≥80%, B ≥70%, C ≥60%, D ≥50%, E ≥40%, U &lt;40%</p>
+        </div>
+        
+        <div class="section-title">
+            <h3>Performance by Specification Area</h3>
+        </div>
+        
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Specification Area</th>
+                    <th>Your Score</th>
+                    <th>Available Marks</th>
+                    <th>Percentage</th>
+                </tr>
+            </thead>
+            <tbody id="spec-results">
+                <!-- Filled by JavaScript -->
+            </tbody>
+        </table>
+        
+        <div class="section-title" style="margin-top: 30px;">
+            <h3>Recommendations for Revision</h3>
+        </div>
+        
+        <div class="summary-card">
+            <p>Focus your revision on these specification areas to improve your understanding:</p>
+            <ul id="recommendations" class="rec-list">
+                <!-- Filled by JavaScript -->
+            </ul>
+        </div>
+
+        <div class="btn-container">
+            <button id="show-model-answers-btn" class="btn">View Model Answers</button>
+        </div>
+    </div>
+
+    <div id="tabs-container" class="card">
+        <h2>Model Answers & Guidance</h2>
+        <p>Use these model answers and tips to improve your understanding of the topics you struggled with.</p>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="results-tab">Results</button>
+            <button class="tab-btn" data-tab="q1-tab">Question 1</button>
+            <button class="tab-btn" data-tab="q2-tab">Question 2</button>
+            <button class="tab-btn" data-tab="q3-tab">Question 3</button>
+            <button class="tab-btn" data-tab="q4-tab">Question 4</button>
+            <button class="tab-btn" data-tab="q5-tab">Question 5</button>
+        </div>
+        
+        <div id="results-tab" class="tab-content active">
+            <p>Click on the question tabs above to view model answers and guidance for each question.</p>
+            <p>Focus your revision on the areas where you scored lowest as identified in the recommendations section.</p>
+        </div>
+        
+        <div id="q1-tab" class="tab-content">
+            <h3>Question 1: Activation Energy & Enthalpy Profiles</h3>
+            
+            <div class="sub-question">
+                <h4>1(a)(i) Define the term activation energy.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> Activation energy is the minimum amount of energy required for a reaction to take place.
+                    <div class="mark-scheme">1 mark for correct definition</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong> For definition questions, be precise and include all key elements – here, that it's the <em>minimum</em> energy needed for a reaction to occur.
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>1(a)(ii) Draw an enthalpy profile diagram for this reaction.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> The diagram should show:
+                    <ul>
+                        <li>Reactants (A+B) and products (C+D) with products at a lower energy level (exothermic reaction)</li>
+                        <li>Activation energy (Ea) of +345 kJ/mol as an upward arrow</li>
+                        <li>Enthalpy change (ΔᵣH) of -638 kJ/mol as a downward arrow</li>
+                        <li>Clear labelling of all components</li>
+                    </ul>
+                    <div class="mark-scheme">1 mark for correct activation energy; 1 mark for products below reactants with correct ΔᵣH</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>For exothermic reactions (negative ΔH), products must be lower in energy than reactants</li>
+                        <li>Label Eₐ with the correct value (+345 kJ/mol) as an upward arrow to the transition state</li>
+                        <li>Draw ΔᵣH (-638 kJ/mol) as a downward arrow from reactants to products</li>
+                        <li>Ensure the axes are correctly labeled (enthalpy on y-axis, reaction progress on x-axis)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>1(a)(iii) Calculate the activation energy for the reverse reaction.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> For the reverse reaction of an exothermic process, add the magnitude of the enthalpy change to the forward activation energy.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Activation energy for reverse reaction = Eₐ(forward) + |ΔᵣH|</p>
+                    <p>= 345 + 638 = 983 kJ/mol</p>
+                    <p>The reverse reaction is unlikely to occur because the activation energy is very high (983 kJ/mol), making it difficult for molecules to acquire enough energy to overcome this substantial barrier.</p>
+                    <div class="mark-scheme">1 mark for correct calculation; 1 mark for explanation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Use the relationship: Eₐ(reverse) = Eₐ(forward) + |ΔᵣH|</li>
+                        <li>For exothermic reactions, Eₐ(reverse) is always greater than Eₐ(forward)</li>
+                        <li>Link the high activation energy to the practical difficulty of the reverse reaction occurring</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>1(b) Suggest why a burning splint cannot start the thermite reaction.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> The energy produced by the burning splint is not sufficient to overcome the high activation energy of the thermite reaction.
+                    <div class="mark-scheme">1 mark for correct explanation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong> Consider the energy provided by an initiator (burning splint) compared to the energy barrier (activation energy) that must be overcome.
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>1(c) Explain what "exothermic" means in terms of bond breaking and making.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> In the thermite reaction, bond breaking is endothermic (energy is absorbed) while bond making is exothermic (energy is released). The overall reaction is exothermic because the energy released during bond formation exceeds the energy required for bond breaking.
+                    <div class="mark-scheme">1 mark for identifying bond breaking as endothermic and bond making as exothermic; 1 mark for explaining the net release of energy</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>State that breaking bonds always requires energy (endothermic)</li>
+                        <li>Mention that forming bonds releases energy (exothermic)</li>
+                        <li>Clarify that for an exothermic reaction the energy released is greater than the energy absorbed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="q2-tab" class="tab-content">
+            <h3>Question 2: Bond Enthalpies & Calculations</h3>
+            
+            <div class="sub-question">
+                <h4>2(a) Use the bond enthalpies to calculate the enthalpy change for the reaction.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Identify all bonds broken (energy input) and bonds formed (energy output), then calculate ΔH = energy input - energy output.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Energy required to break bonds:</p>
+                    <ul>
+                        <li>C-H: 413 kJ/mol</li>
+                        <li>Cl-Cl: 242 kJ/mol</li>
+                    </ul>
+                    <p>Total energy input = 413 + 242 = 655 kJ/mol</p>
+                    
+                    <p>Energy released when forming bonds:</p>
+                    <ul>
+                        <li>C-Cl: 338 kJ/mol</li>
+                        <li>H-Cl: 432 kJ/mol</li>
+                    </ul>
+                    <p>Total energy output = 338 + 432 = 770 kJ/mol</p>
+                    
+                    <p>ΔH = 655 - 770 = -115 kJ/mol</p>
+                    <div class="mark-scheme">Marks awarded for correctly identifying bonds and calculating the final answer.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>List all bonds broken (input energy)</li>
+                        <li>List all bonds formed (output energy)</li>
+                        <li>Subtract total energy released from total energy required</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>2(b) Is this reaction exothermic or endothermic? Explain how you made your choice.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> Since ΔH is negative (-115 kJ/mol), the reaction is exothermic as it releases energy.
+                    <div class="mark-scheme">Marks for stating "exothermic" and linking it to the negative ΔH value.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Negative ΔH means energy is released (exothermic)</li>
+                        <li>Positive ΔH means energy is absorbed (endothermic)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>2(c) Suggest a reason why an enthalpy change calculated from average bond enthalpies might not be accurate.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> Average bond enthalpies are general values and do not account for variations in bond strength due to different molecular environments. Additionally, experimental conditions can introduce errors.
+                    <div class="mark-scheme">Marks for mentioning the limitations of average values and experimental conditions.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Average values may not reflect the exact bond strength in a particular molecule</li>
+                        <li>Experimental factors can lead to discrepancies</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>2(d) Explain why this enthalpy change is also known as ΔₕH of ethyne.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> It is known as the enthalpy of combustion of ethyne because it represents the energy released when one mole of ethyne is completely burned in oxygen to produce CO₂ and H₂O.
+                    <div class="mark-scheme">Marks for noting the complete combustion of one mole of ethyne.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Identify that complete combustion produces CO₂ and H₂O</li>
+                        <li>Mention that one mole is burned</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>2(e) Calculate the enthalpy change if 78.0 g of ethyne is completely burnt.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Convert the mass to moles (n = m/M) and then multiply by the molar enthalpy change.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Moles of ethyne = 78.0 g ÷ 26.0 g/mol = 3.00 mol</p>
+                    <p>ΔH = 3.00 mol × (-1214 kJ/mol) = -3642 kJ</p>
+                    <div class="mark-scheme">Marks for correct mole conversion and calculation.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Use molar mass of ethyne (26.0 g/mol)</li>
+                        <li>Multiply moles by the molar enthalpy change</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="q3-tab" class="tab-content">
+            <h3>Question 3: Neutralisation & Experimental Methods</h3>
+            
+            <div class="sub-question">
+                <h4>3(a) Write a balanced equation for the neutralisation reaction between aqueous sulfuric acid and aqueous potassium hydroxide, including state symbols.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> H₂SO₄(aq) + 2KOH(aq) → K₂SO₄(aq) + 2H₂O(l)
+                    <div class="mark-scheme">1 mark for correct balanced equation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Remember sulfuric acid is diprotic and reacts with two moles of base</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(b) What is meant by the enthalpy change of neutralisation?</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> It is the heat energy released when one mole of water is formed in a neutralisation reaction between an acid and a base.
+                    <div class="mark-scheme">1 mark for correct definition</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Specify that it refers to the formation of 1 mole of water</li>
+                        <li>Mention that it is typically exothermic</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(c) Calculate the energy, q, released by the reaction in kJ.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Use q = m × c × ΔT with total mass (assuming density 1 g/cm³).
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Total volume = 25.0 + 50.0 = 75.0 cm³, mass = 75.0 g</p>
+                    <p>ΔT = 29°C - 22°C = 7°C</p>
+                    <p>q = 75.0 g × 4.18 J/(g·°C) × 7°C = 2194.5 J = 2.19 kJ</p>
+                    <div class="mark-scheme">Marks for proper calculation and unit conversion.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Ensure you sum the volumes for total mass</li>
+                        <li>Convert joules to kilojoules (divide by 1000)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(d) Calculate the number of moles of water produced in this reaction.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Volume of HCl = 25.0 cm³ = 0.0250 L; concentration = 2.0 mol/L</p>
+                    <p>Moles = 2.0 × 0.0250 = 0.050 mol</p>
+                    <p>Water produced = 0.050 mol</p>
+                    <div class="mark-scheme">1 mark for correct calculation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Convert cm³ to L by dividing by 1000</li>
+                        <li>Apply the mole ratio from the balanced equation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(e) Calculate the enthalpy change of neutralisation in kJ/mol of water formed.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Divide the energy released by the number of moles of water produced.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>q = -2.19 kJ; moles of water = 0.050 mol</p>
+                    <p>ΔH = -2.19 kJ ÷ 0.050 mol = -43.8 kJ/mol ≈ -44 kJ/mol</p>
+                    <div class="mark-scheme">Marks for linking energy change to mole calculation and correct sign.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Include the negative sign for exothermic reactions</li>
+                        <li>Round to appropriate significant figures</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(f) Predict whether the experimental enthalpy change of neutralisation will be more or less exothermic than the theoretical value.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> The experimental value will be less exothermic because heat losses to the calorimeter and surroundings result in a lower measured temperature change.
+                    <div class="mark-scheme">1 mark for valid explanation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Mention possible heat loss mechanisms</li>
+                        <li>Explain how these affect the measured value</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>3(g) Suggest three alterations to the apparatus that would improve this experiment.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <ol>
+                        <li>Use a well-insulated (polystyrene) calorimeter with a lid to reduce heat loss.</li>
+                        <li>Utilize a digital thermometer with a data logger for precise temperature measurements.</li>
+                        <li>Incorporate a stirring mechanism to ensure uniform temperature distribution.</li>
+                    </ol>
+                    <div class="mark-scheme">1 mark for each valid suggestion (up to 3 marks)</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Focus on minimizing heat loss</li>
+                        <li>Improve measurement precision</li>
+                        <li>Ensure consistent mixing of the solution</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="q4-tab" class="tab-content">
+            <h3>Question 4: Hess's Law & Enthalpy Cycles</h3>
+            
+            <div class="sub-question">
+                <h4>4(a) Explain why the standard enthalpy of formation of benzene cannot be measured directly, and describe an alternative approach.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> Direct synthesis of benzene from its elements does not occur under standard conditions, and attempts to combine carbon and hydrogen yield mixtures. Instead, the combustion enthalpy of benzene can be measured and Hess's Law applied with known formation enthalpies for CO₂ and H₂O.
+                    <div class="mark-scheme">1 mark for a valid explanation</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Note the impracticality of direct synthesis</li>
+                        <li>Describe the indirect method using combustion data</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>4(b) The standard enthalpy of formation of ethanol is -277 kJ/mol. Write the corresponding formation equation and explain why the value is negative.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> 2C(s) + 3H₂(g) + ½O₂(g) → C₂H₅OH(l)     ΔH = -277 kJ/mol. The negative sign indicates that the formation of ethanol is exothermic as strong bonds are formed, releasing energy.
+                    <div class="mark-scheme">Marks for correct equation and explanation.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Mention formation from elements in their standard states</li>
+                        <li>Explain that energy is released during bond formation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>4(c) Calculate the standard enthalpy of formation of propene using Hess's Law with the provided data.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Rearrange the combustion and formation equations to obtain the formation reaction for propene.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Rearranging the given reactions and combining them gives:</p>
+                    <p>3C(s) + 3H₂(g) → C₃H₆(g) with ΔH = +18 kJ/mol.</p>
+                    <div class="mark-scheme">Marks for correct use of Hess's Law and final answer.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Reverse and multiply equations as needed</li>
+                        <li>Sum the enthalpy changes to get the final value</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="q5-tab" class="tab-content">
+            <h3>Question 5: Standard Conditions & Experimental Methods</h3>
+            
+            <div class="sub-question">
+                <h4>5(a) Explain why standard enthalpy values are essential for comparing chemical reactions and why 298 K is chosen as the standard temperature.</h4>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong> Standard values provide a common basis for comparison, ensure reproducibility, and allow the use of Hess's Law. 298 K is chosen as it approximates room temperature and the standard states of most substances.
+                    <div class="mark-scheme">1 mark for a complete explanation.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Emphasize consistency and reproducibility</li>
+                        <li>Mention practical laboratory conditions</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>5(b) Using the provided data, calculate the standard enthalpy of formation of propanone.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Use the combustion reaction and known formation enthalpies of CO₂ and H₂O.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Products: 3CO₂ + 3H₂O gives 3×(-394) + 3×(-286) = -2040 kJ/mol.</p>
+                    <p>Then, -1790 = -2040 - ΔH[propanone] so ΔH[propanone] = -250 kJ/mol.</p>
+                    <div class="mark-scheme">Marks for proper calculation and answer.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>Set up the equation using Hess's Law</li>
+                        <li>Solve for the unknown formation enthalpy</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sub-question">
+                <h4>5(c) Design an experimental procedure to determine the enthalpy of combustion of ethanol, listing all required measurements and explaining the calculation.</h4>
+                <div class="hint">
+                    <strong>Hint:</strong> Consider measuring the mass of ethanol burned and the temperature change in a known mass of water.
+                </div>
+                <div class="model-answer">
+                    <strong>Model Answer:</strong>
+                    <p>Set up a spirit burner with a known initial mass of ethanol and a calorimeter containing a measured volume of water. Record the water's initial temperature, light the burner, and after heating, record the final temperature and the remaining mass of ethanol. Calculate the energy absorbed by water using q = m × c × ΔT, then determine the moles of ethanol burned. Finally, compute the enthalpy of combustion as energy released per mole.</p>
+                    <div class="mark-scheme">Marks for outlining a clear procedure and including key measurements.</div>
+                </div>
+                <div class="guidance">
+                    <strong>Guidance:</strong>
+                    <ul>
+                        <li>List measurements: initial/final water temperature, water mass, and mass of ethanol burned.</li>
+                        <li>Describe the calculation using q = mcΔT and moles of ethanol.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Follow-Up Questions Section -->
+    <div id="followup-questions" class="card">
+        <h2>Follow-Up Questions</h2>
+        <p>Based on your performance, here are some follow-up questions (with hidden hints and answers). Use the "Previous" and "Next" buttons to navigate, and click "Show Hint and Model Answer" to reveal them.</p>
+        <div id="followup-container" style="min-height:200px; margin-bottom:20px;"></div>
+        <div class="btn-container">
+            <button id="prev-followup" class="btn">Previous</button>
+            <button id="next-followup" class="btn">Next</button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default scores to 0
+            const inputs = document.querySelectorAll('.score-input');
+            inputs.forEach(input => input.value = 0);
+            
+            // Data for specification mapping and revision recommendations
+            const specMap = {
+                'a': { desc: "3.2.1(a) Exothermic and endothermic reactions", questions: ['q1c', 'q2b'] },
+                'b': { desc: "3.2.1(b) Enthalpy profile diagrams", questions: ['q1aii'] },
+                'c': { desc: "3.2.1(c) Activation energy", questions: ['q1ai', 'q1aiii', 'q1b'] },
+                'd': { desc: "3.2.1(d) Types of enthalpy changes", questions: ['q2a', 'q2d', 'q3a', 'q3b', 'q3e', 'q4b', 'q5a', 'q5b'] },
+                'e': { desc: "3.2.1(e) Experimental determination of enthalpy changes", questions: ['q2e', 'q3c', 'q3d', 'q3e', 'q5c'] },
+                'g': { desc: "3.2.1(g) Hess's law and enthalpy cycles", questions: ['q4c', 'q5b'] },
+                'h': { desc: "3.2.1(h) Techniques for determining enthalpy changes", questions: ['q2c', 'q3f', 'q3g', 'q4a', 'q5c'] }
+            };
+
+            const revisionSuggestions = {
+                'a': [
+                    "Create flashcards with key definitions of exothermic and endothermic processes.",
+                    "Practice comparing energy changes in different reactions.",
+                    "Draw diagrams showing energy flow for exothermic vs endothermic reactions."
+                ],
+                'b': [
+                    "Practice drawing enthalpy profiles for various reactions.",
+                    "Label activation energy and enthalpy changes clearly.",
+                    "Compare diagrams with and without catalysts."
+                ],
+                'c': [
+                    "Work through activation energy calculations for both forward and reverse reactions.",
+                    "Link activation energy to reaction rates using real-world examples.",
+                    "Discuss the effect of catalysts on activation energy."
+                ],
+                'd': [
+                    "Summarize different types of enthalpy changes in a table.",
+                    "Practice determining the type of enthalpy change from reaction equations.",
+                    "Review the importance of standard conditions."
+                ],
+                'e': [
+                    "Solve multiple calorimetry problems using q = mcΔT.",
+                    "Practice converting between kJ and kJ/mol.",
+                    "Sketch calorimeter setups to identify potential sources of error."
+                ],
+                'g': [
+                    "Review Hess's Law with step-by-step examples.",
+                    "Practice combining reaction equations to find unknown enthalpy changes.",
+                    "Create a method sheet for solving Hess's Law problems."
+                ],
+                'h': [
+                    "Compare different experimental techniques for measuring enthalpy.",
+                    "Discuss limitations and sources of error in calorimetry.",
+                    "Design improved experimental setups to reduce heat loss."
+                ]
+            };
+
+            // Follow-Up Data (keys correspond to question IDs)
+            const followUpData = {
+                "q1ai": [{
+                    question: "Explain why some reactions with negative enthalpy changes (exothermic) still require a source of heat or a catalyst to proceed.",
+                    hint: "Think about the energy barrier that must be overcome for a reaction to start.",
+                    modelAnswer: "Even though exothermic reactions release energy overall (negative ΔH), they still require an initial input of energy to overcome the activation energy barrier. Catalysts lower this barrier, enabling the reaction to proceed."
+                }],
+                "q1aii": [{
+                    question: "Draw an enthalpy profile diagram for an endothermic reaction with ΔᵣH = +125 kJ/mol and an activation energy of 210 kJ/mol. Label all key features.",
+                    hint: "For endothermic reactions, products have higher enthalpy than reactants.",
+                    modelAnswer: "The diagram should show reactants at a lower enthalpy level, an upward arrow representing the 210 kJ/mol activation energy, and an overall increase of +125 kJ/mol to the products, with all features clearly labeled."
+                }],
+                "q1aiii": [{
+                    question: "For an endothermic reaction with ΔᵣH = +85 kJ/mol and activation energy of 120 kJ/mol, calculate the activation energy for the reverse reaction and explain why it might occur more readily.",
+                    hint: "Subtract |ΔᵣH| from the forward activation energy.",
+                    modelAnswer: "Activation energy for the reverse reaction = 120 kJ/mol - 85 kJ/mol = 35 kJ/mol. The reverse reaction is more likely because of the lower energy barrier and its exothermic nature."
+                }],
+                "q1b": [{
+                    question: "Explain why a match can ignite a candle, but the candle won't spontaneously combust at room temperature.",
+                    hint: "Consider the energy distribution among molecules at room temperature.",
+                    modelAnswer: "At room temperature, few molecules have enough energy to overcome the activation barrier. A match provides a localized heat source that increases molecular energy, initiating combustion."
+                }],
+                "q1c": [{
+                    question: "For N₂(g) + O₂(g) → 2NO(g), explain why the reaction is endothermic using the given bond enthalpies.",
+                    hint: "Compare the energy required to break bonds versus the energy released in forming new bonds.",
+                    modelAnswer: "Breaking N≡N (945 kJ/mol) and O=O (498 kJ/mol) requires 1443 kJ/mol, while forming two N=O bonds releases 1214 kJ/mol. The net energy input of +229 kJ/mol makes the reaction endothermic."
+                }],
+                "q2a": [{
+                    question: "Calculate the enthalpy change for CH₄(g) + Cl₂(g) → CH₃Cl(g) + HCl(g) using given bond enthalpies.",
+                    hint: "Sum the energy for bonds broken and subtract the energy for bonds formed.",
+                    modelAnswer: "Energy required: 413 (C-H) + 242 (Cl-Cl) = 655 kJ/mol; energy released: 338 (C-Cl) + 432 (H-Cl) = 770 kJ/mol; ΔH = 655 - 770 = -115 kJ/mol."
+                }],
+                "q2b": [{
+                    question: "Given a temperature drop from 22.5°C to 19.8°C in a 50.0 g solution, determine if the reaction is exothermic or endothermic.",
+                    hint: "Use q = mcΔT and note that a temperature drop indicates energy absorption.",
+                    modelAnswer: "ΔT = -2.7°C; q = 50.0 × 4.18 × (-2.7) = -564.3 J (~-0.564 kJ). The negative value shows the reaction is endothermic."
+                }],
+                "q2c": [{
+                    question: "The experimental ΔH for H₂ + Cl₂ → 2HCl is -184 kJ/mol, but calculations give -193 kJ/mol. Explain two reasons for this discrepancy.",
+                    hint: "Consider limitations of average bond enthalpies and experimental heat loss.",
+                    modelAnswer: "Average bond enthalpies may not reflect specific bond energies, and experimental heat losses (to the calorimeter, surroundings) can result in a lower measured value."
+                }],
+                "q2d": [{
+                    question: "Explain why C₃H₈ + 5O₂ → 3CO₂ + 4H₂O is classified as the standard enthalpy of combustion of propane and what changes would make it non-standard.",
+                    hint: "Complete combustion of one mole in excess oxygen defines standard combustion.",
+                    modelAnswer: "This reaction represents complete combustion under standard conditions. Incomplete combustion, non-stoichiometric amounts, or non-standard product states would make it non-standard."
+                }],
+                "q2e": [{
+                    question: "If the enthalpy of combustion of methane is -890 kJ/mol, calculate the energy released from combusting 16.0 g of methane.",
+                    hint: "Convert mass to moles (16.0 g/mol) and multiply by the enthalpy of combustion.",
+                    modelAnswer: "Moles = 16.0 g ÷ 16.0 g/mol = 1.00 mol; energy released = 1.00 mol × (-890 kJ/mol) = -890 kJ."
+                }],
+                "q3a": [{
+                    question: "Write a balanced equation for the neutralization reaction between aqueous sulfuric acid and potassium hydroxide.",
+                    hint: "Sulfuric acid is diprotic.",
+                    modelAnswer: "H₂SO₄(aq) + 2KOH(aq) → K₂SO₄(aq) + 2H₂O(l)"
+                }],
+                "q3b": [{
+                    question: "Explain the enthalpy change of neutralisation when a weak acid reacts with a strong base versus strong acid-base reactions.",
+                    hint: "Consider the additional energy required to dissociate a weak acid.",
+                    modelAnswer: "Weak acids partially dissociate, requiring extra energy to fully ionize before neutralization, making the overall reaction slightly less exothermic than with strong acids."
+                }],
+                "q3c": [{
+                    question: "Calculate the energy released in kJ when 40.0 cm³ of 1.0 M HNO₃ is mixed with 40.0 cm³ of 1.0 M KOH, given a temperature rise from 21.5°C to 28.3°C.",
+                    hint: "Total volume is 80.0 cm³ and assume density = 1 g/cm³.",
+                    modelAnswer: "Mass = 80.0 g; ΔT = 6.8°C; q = 80.0 × 4.18 × 6.8 = 2274.6 J ≈ 2.27 kJ released."
+                }],
+                "q3d": [{
+                    question: "Calculate the moles of water produced when 25.0 cm³ of 0.500 M H₂SO₄ reacts with 50.0 cm³ of 0.500 M NaOH.",
+                    hint: "Determine the limiting reagent and use the mole ratio from the balanced equation.",
+                    modelAnswer: "Moles of H₂SO₄ = 0.0125; since 1 mole H₂SO₄ produces 2 moles H₂O, water produced = 0.0125 × 2 = 0.0250 mol."
+                }],
+                "q3e": [{
+                    question: "Calculate the enthalpy change of neutralisation in kJ/mol when mixing 30.0 cm³ of 1.50 M HCl with 30.0 cm³ of 1.50 M NaOH and the temperature rises from 22.0°C to 35.5°C.",
+                    hint: "Determine the energy change and moles of water formed.",
+                    modelAnswer: "Total mass = 60.0 g; ΔT = 13.5°C; q = 60.0 × 4.18 × 13.5 ≈ 3385.8 J (3.39 kJ); moles of water = 0.0450; ΔH ≈ -75.3 kJ/mol."
+                }],
+                "q3f": [{
+                    question: "Explain why an experimental enthalpy change of -52.8 kJ/mol might be less exothermic than the theoretical value of -57.3 kJ/mol.",
+                    hint: "Consider heat absorption by the calorimeter and heat loss to the surroundings.",
+                    modelAnswer: "Some of the heat is absorbed by the calorimeter and lost to the environment, resulting in a measured value that is less exothermic."
+                }],
+                "q3g": [{
+                    question: "Suggest three modifications to a polystyrene cup calorimeter setup that would improve experimental accuracy.",
+                    hint: "Focus on insulation, measurement precision, and mixing.",
+                    modelAnswer: "Use nested cups with a lid for better insulation, employ a digital thermometer with a data logger for precise readings, and add a magnetic stirrer to ensure uniform temperature distribution."
+                }],
+                "q4a": [{
+                    question: "Explain why the standard enthalpy of formation of benzene cannot be measured directly and describe an alternative method.",
+                    hint: "Consider the challenges of synthesizing benzene directly from its elements.",
+                    modelAnswer: "Direct synthesis of benzene from elemental carbon and hydrogen is impractical and yields mixtures. Instead, measure its combustion enthalpy and use Hess's Law with known formation enthalpies for CO₂ and H₂O to calculate benzene's formation enthalpy."
+                }],
+                "q4b": [{
+                    question: "The standard enthalpy of formation of ethanol is -277 kJ/mol. Write the formation equation and explain why the value is negative.",
+                    hint: "Formation from elements in their standard states releases energy if bonds form strongly.",
+                    modelAnswer: "2C(s) + 3H₂(g) + ½O₂(g) → C₂H₅OH(l)     ΔH = -277 kJ/mol. The negative value indicates that the formation is exothermic, releasing energy as stable bonds form."
+                }],
+                "q4c": [{
+                    question: "Calculate the standard enthalpy of formation of propene using the provided combustion data and Hess's Law.",
+                    hint: "Rearrange the equations to get 3C(s) + 3H₂(g) → C₃H₆(g).",
+                    modelAnswer: "After reversing and combining the given reactions, the standard enthalpy of formation of propene is calculated as +18 kJ/mol."
+                }],
+                "q5a": [{
+                    question: "Explain why standard enthalpy values are essential for comparing reactions and why 298 K is chosen.",
+                    hint: "Consider consistency, reproducibility, and standard states.",
+                    modelAnswer: "They provide a common basis for comparison and calculations (e.g., Hess's Law). 298 K approximates room temperature and is the standard state for many substances, ensuring consistent data."
+                }],
+                "q5b": [{
+                    question: "Using the provided data, calculate the standard enthalpy of formation of propanone.",
+                    hint: "Apply Hess's Law using the combustion reaction and known ΔH for CO₂ and H₂O.",
+                    modelAnswer: "Products: 3CO₂ + 3H₂O gives -2040 kJ/mol. With -1790 kJ/mol for combustion, ΔH formation = -2040 + 1790 = -250 kJ/mol."
+                }],
+                "q5c": [{
+                    question: "Design an experimental procedure to determine the enthalpy of combustion of ethanol, listing all necessary measurements and how the calculation is made.",
+                    hint: "Consider measuring water temperature change and mass of ethanol burned.",
+                    modelAnswer: "Set up a spirit burner with a known mass of ethanol and a calorimeter with a measured volume of water. Record the initial water temperature, light the burner, and once the temperature stabilizes, record the final temperature and the remaining ethanol mass. Calculate q = mcΔT for the water and then determine moles of ethanol burned to compute the enthalpy of combustion per mole."
+                }]
+            };
+
+            let followUpArray = [];
+            let currentFollowUpIndex = 0;
+
+            function displayFollowUp(index) {
+                const container = document.getElementById('followup-container');
+                if (followUpArray.length === 0) {
+                    container.innerHTML = "<p>No follow-up questions available.</p>";
+                    return;
+                }
+                const item = followUpArray[index];
+                container.innerHTML = `
+                    <h4>Follow-Up for Question (${item.qid})</h4>
+                    <p><strong>Question:</strong> ${item.question}</p>
+                    <button class="btn" id="toggle-followup">Show Hint and Model Answer</button>
+                    <div id="followup-details" style="display: none;">
+                        <div class="hint"><strong>Hint:</strong> ${item.hint}</div>
+                        <div class="model-answer"><strong>Model Answer:</strong> ${item.modelAnswer}</div>
+                        <div class="mark-scheme"><em>Score for this question: ${(item.percentage * 100).toFixed(1)}%</em></div>
+                    </div>
+                `;
+                document.getElementById('toggle-followup').addEventListener('click', function() {
+                    const details = document.getElementById('followup-details');
+                    if (details.style.display === 'none') {
+                        details.style.display = 'block';
+                        this.textContent = 'Hide Hint and Model Answer';
+                    } else {
+                        details.style.display = 'none';
+                        this.textContent = 'Show Hint and Model Answer';
+                    }
+                });
+            }
+
+            document.getElementById('next-followup').addEventListener('click', function() {
+                if (currentFollowUpIndex < followUpArray.length - 1) {
+                    currentFollowUpIndex++;
+                    displayFollowUp(currentFollowUpIndex);
+                }
+            });
+
+            document.getElementById('prev-followup').addEventListener('click', function() {
+                if (currentFollowUpIndex > 0) {
+                    currentFollowUpIndex--;
+                    displayFollowUp(currentFollowUpIndex);
+                }
+            });
+
+            // Main analysePerformance function (single definition)
+            function analysePerformance() {
+                const scoresObj = {
+                    'q1ai': parseInt(document.getElementById('q1ai').value) || 0,
+                    'q1aii': parseInt(document.getElementById('q1aii').value) || 0,
+                    'q1aiii': parseInt(document.getElementById('q1aiii').value) || 0,
+                    'q1b': parseInt(document.getElementById('q1b').value) || 0,
+                    'q1c': parseInt(document.getElementById('q1c').value) || 0,
+                    'q2a': parseInt(document.getElementById('q2a').value) || 0,
+                    'q2b': parseInt(document.getElementById('q2b').value) || 0,
+                    'q2c': parseInt(document.getElementById('q2c').value) || 0,
+                    'q2d': parseInt(document.getElementById('q2d').value) || 0,
+                    'q2e': parseInt(document.getElementById('q2e').value) || 0,
+                    'q3a': parseInt(document.getElementById('q3a').value) || 0,
+                    'q3b': parseInt(document.getElementById('q3b').value) || 0,
+                    'q3c': parseInt(document.getElementById('q3c').value) || 0,
+                    'q3d': parseInt(document.getElementById('q3d').value) || 0,
+                    'q3e': parseInt(document.getElementById('q3e').value) || 0,
+                    'q3f': parseInt(document.getElementById('q3f').value) || 0,
+                    'q3g': parseInt(document.getElementById('q3g').value) || 0,
+                    'q4a': parseInt(document.getElementById('q4a').value) || 0,
+                    'q4b': parseInt(document.getElementById('q4b').value) || 0,
+                    'q4c': parseInt(document.getElementById('q4c').value) || 0,
+                    'q5a': parseInt(document.getElementById('q5a').value) || 0,
+                    'q5b': parseInt(document.getElementById('q5b').value) || 0,
+                    'q5c': parseInt(document.getElementById('q5c').value) || 0
+                };
+                const maxMarksObj = {
+                    'q1ai': 1, 'q1aii': 2, 'q1aiii': 2, 'q1b': 1, 'q1c': 2,
+                    'q2a': 3, 'q2b': 2, 'q2c': 1, 'q2d': 2, 'q2e': 2,
+                    'q3a': 1, 'q3b': 1, 'q3c': 2, 'q3d': 1, 'q3e': 2, 'q3f': 1, 'q3g': 2,
+                    'q4a': 1, 'q4b': 2, 'q4c': 3,
+                    'q5a': 1, 'q5b': 3, 'q5c': 3
+                };
+
+                let totalScore = 0, totalMax = 0;
+                for (const q in scoresObj) {
+                    totalScore += scoresObj[q];
+                    totalMax += maxMarksObj[q];
+                }
+                const percentage = (totalScore / totalMax) * 100;
+                let grade;
+                if (percentage >= 80) grade = 'A';
+                else if (percentage >= 70) grade = 'B';
+                else if (percentage >= 60) grade = 'C';
+                else if (percentage >= 50) grade = 'D';
+                else if (percentage >= 40) grade = 'E';
+                else grade = 'U';
+
+                document.getElementById('results').style.display = 'block';
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+                const gradeContainer = document.getElementById('grade-container');
+                gradeContainer.textContent = `Overall Grade: ${grade}`;
+                gradeContainer.className = `grade-display grade-${grade}`;
+                document.getElementById('total-score').textContent = `Total Score: ${totalScore} / ${totalMax}`;
+                document.getElementById('percentage').textContent = `Overall Percentage: ${percentage.toFixed(1)}%`;
+
+                // Specification performance
+                const specPerformance = {};
+                for (const spec in specMap) {
+                    let specScore = 0, specMax = 0;
+                    specMap[spec].questions.forEach(qid => {
+                        if ((qid === 'q3e' && (spec === 'd' || spec === 'e')) ||
+                            (qid === 'q5b' && (spec === 'd' || spec === 'g')) ||
+                            (qid === 'q5c' && (spec === 'e' || spec === 'h'))) {
+                            specScore += scoresObj[qid] / 2;
+                            specMax += maxMarksObj[qid] / 2;
+                        } else {
+                            specScore += scoresObj[qid];
+                            specMax += maxMarksObj[qid];
+                        }
+                    });
+                    const specPercentage = (specScore / specMax) * 100;
+                    specPerformance[spec] = {
+                        description: specMap[spec].desc,
+                        score: specScore,
+                        maxMarks: specMax,
+                        percentage: specPercentage
+                    };
+                }
+                const sortedSpecs = Object.keys(specPerformance).sort((a, b) => specPerformance[b].percentage - specPerformance[a].percentage);
+                const specResultsTable = document.getElementById('spec-results');
+                specResultsTable.innerHTML = '';
+                sortedSpecs.forEach((spec, index) => {
+                    const row = document.createElement('tr');
+                    let color;
+                    if (specPerformance[spec].percentage >= 80) color = '#e8f5e9';
+                    else if (specPerformance[spec].percentage >= 70) color = '#e3f2fd';
+                    else if (specPerformance[spec].percentage >= 60) color = '#e0f7fa';
+                    else if (specPerformance[spec].percentage >= 50) color = '#fff8e1';
+                    else if (specPerformance[spec].percentage >= 40) color = '#fff3e0';
+                    else color = '#ffebee';
+                    row.style.backgroundColor = color;
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${specPerformance[spec].description}</td>
+                        <td>${specPerformance[spec].score.toFixed(1)}</td>
+                        <td>${specPerformance[spec].maxMarks.toFixed(1)}</td>
+                        <td>${specPerformance[spec].percentage.toFixed(1)}%</td>
+                    `;
+                    specResultsTable.appendChild(row);
+                });
+
+                // Revision recommendations
+                const recommendationsDiv = document.getElementById('recommendations');
+                recommendationsDiv.innerHTML = '';
+                const weakAreas = sortedSpecs.slice(Math.ceil(sortedSpecs.length * 0.6));
+                if (weakAreas.length > 0) {
+                    weakAreas.forEach(spec => {
+                        const li = document.createElement('li');
+                        li.style.borderLeftColor = (specPerformance[spec].percentage >= 50) ? '#ff9800' : (specPerformance[spec].percentage >= 30 ? '#f44336' : '#b71c1c');
+                        li.innerHTML = `<strong>${specPerformance[spec].description}</strong>: ${specPerformance[spec].percentage.toFixed(1)}%
+                        <div class="explanation">You scored ${specPerformance[spec].score.toFixed(1)} out of ${specPerformance[spec].maxMarks.toFixed(1)} marks</div>`;
+                        const suggestions = document.createElement('ul');
+                        suggestions.className = 'revision-suggestions';
+                        revisionSuggestions[spec].forEach(suggestion => {
+                            const suggestionLi = document.createElement('li');
+                            suggestionLi.textContent = suggestion;
+                            suggestions.appendChild(suggestionLi);
+                        });
+                        li.appendChild(suggestions);
+                        recommendationsDiv.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.style.borderLeftColor = '#4caf50';
+                    li.textContent = 'Well done! You performed consistently across all areas.';
+                    recommendationsDiv.appendChild(li);
+                }
+
+                // Build follow-up questions array based on performance
+                followUpArray = [];
+                for (const qid in followUpData) {
+                    if (scoresObj.hasOwnProperty(qid)) {
+                        const perc = scoresObj[qid] / maxMarksObj[qid];
+                        followUpData[qid].forEach(item => {
+                            followUpArray.push({
+                                qid: qid,
+                                percentage: perc,
+                                question: item.question,
+                                hint: item.hint,
+                                modelAnswer: item.modelAnswer
+                            });
+                        });
+                    }
+                }
+                followUpArray.sort((a, b) => a.percentage - b.percentage);
+                currentFollowUpIndex = 0;
+                displayFollowUp(currentFollowUpIndex);
+            }
+
+            // Attach event listeners
+            document.getElementById('analyse-btn').addEventListener('click', analysePerformance);
+            document.getElementById('show-model-answers-btn').addEventListener('click', function() {
+                document.getElementById('tabs-container').style.display = 'block';
+                document.getElementById('tabs-container').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Tab functionality for model answer tabs
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
