@@ -1,1 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>The Reactivity Series & the Reactions of Acids Test Analysis</title>
+  <style>
+    :root {
+      --primary-color: #1e88e5;
+      --primary-dark: #1565c0;
+      --primary-light: #bbdefb;
+      --secondary-color: #303f9f;
+      --accent-color: #f4511e;
+      --light-color: #f5f5f5;
+      --dark-color: #263238;
+      --success-color: #43a047;
+      --warning-color: #fb8c00;
+      --text-color: #37474f;
+      --border-radius: 8px;
+      --box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.15);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: #f0f2f5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,5 C50,40 50,60 0,100 Z" fill="rgba(255,255,255,0.08)"/></svg>');
+      background-size: cover;
+    }
+    
+    h1, h2, h3, h4, h5 {
+      color: var(--dark-color);
+      margin-top: 0;
+      font-weight: 600;
+    }
+    
+    header h1 {
+      color: white;
+      margin: 0;
+      font-size: 2.4em;
+      font-weight: 700;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    
+    header p {
+      color: rgba(255,255,255,0.9);
+      margin: 8px 0 0;
+      font-size: 1.2em;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .student-info {
+      background-color: white;
+      padding: 25px;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      position: relative;
+    }
+    
+    .info-group {
+      flex: 1;
+      min-width: 200px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+    
+    input.info-input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    input.info-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px var(--primary-light);
+      outline: none;
+    }
+    
+    .section {
+      background-color: white;
+      padding: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      margin-bottom: 25px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      margin-bottom: 20px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+    }
+    
+    th, td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      padding: 14px 12px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--primary-color);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    tr:nth-child(even) {
+      background-color: rgba(0,0,0,0.02);
+    }
+    
+    tr:hover {
+      background-color: rgba(0,0,0,0.04);
+    }
+    
+    input.score-input {
+      width: 70px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      text-align: center;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+    
+    input.score-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px var(--primary-light);
+      outline: none;
+    }
+    
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    
+    button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+    }
+    
+    button.secondary {
+      background-color: var(--secondary-color);
+    }
+    
+    button.secondary:hover {
+      background-color: #283593;
+    }
+    
+    button.success {
+      background-color: var(--success-color);
+    }
+    
+    button.success:hover {
+      background-color: #388e3c;
+    }
+    
+    .hidden {
+      display: none;
+    }
+    
+    .summary-row {
+      padding: 16px;
+      margin: 10px 0;
+      border-radius: var(--border-radius);
+      border-left: 5px solid #ddd;
+      background-color: white;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+    
+    .summary-row:hover {
+      transform: translateX(5px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .grade-display-container {
+      text-align: center;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .grade-display {
+      font-size: 3em;
+      font-weight: 700;
+      text-align: center;
+      width: 120px;
+      height: 120px;
+      line-height: 120px;
+      color: white;
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      border-radius: 50%;
+      margin: 0 auto;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .grade-display::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+      opacity: 0.6;
+    }
+    
+    .grade-percentage {
+      display: block;
+      font-size: 0.4em;
+      line-height: 1;
+      margin-top: 5px;
+      opacity: 0.8;
+    }
+    
+    .progress-container {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+    }
+    
+    .progress-label {
+      width: 120px;
+      font-weight: bold;
+    }
+    
+    .progress-bar {
+      flex-grow: 1;
+      height: 24px;
+      background-color: #e0e0e0;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      border-radius: 12px;
+      background: linear-gradient(to right, var(--primary-light), var(--primary-color));
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+    
+    .progress-fill::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.15) 25%,
+        transparent 25%,
+        transparent 50%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.15) 75%,
+        transparent 75%
+      );
+      background-size: 20px 20px;
+      animation: progressAnimation 1s linear infinite;
+    }
+    
+    @keyframes progressAnimation {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 0; }
+    }
+    
+    .progress-text {
+      width: 60px;
+      text-align: right;
+      margin-left: 10px;
+      font-weight: 600;
+    }
+    
+    .tab-container {
+      margin-top: 25px;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      border-bottom: none;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    
+    .tab-button {
+      padding: 12px 20px;
+      background-color: #eee;
+      color: var(--dark-color);
+      border: none;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: none;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .tab-button:hover {
+      background-color: #e0e0e0;
+      transform: translateY(0);
+      box-shadow: none;
+    }
+    
+    .tab-button.active {
+      background: linear-gradient(to bottom, var(--primary-color), var(--primary-dark));
+      color: white;
+    }
+    
+    .tab-content {
+      display: none;
+      padding: 25px;
+      border: none;
+      border-radius: 0 var(--border-radius) var(--border-radius) var(--border-radius);
+      background-color: white;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    .recommendation {
+      background-color: white;
+      border-left: 5px solid var(--warning-color);
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+    
+    .recommendation:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateX(5px);
+    }
+    
+    .recommendation h4 {
+      margin-top: 0;
+      color: var(--warning-color);
+      display: flex;
+      align-items: center;
+    }
+    
+    .recommendation h4::before {
+      content: "🔍";
+      margin-right: 8px;
+    }
+    
+    .follow-up-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f5f5f5;
+      border-radius: var(--border-radius);
+    }
+    
+    .follow-up {
+      border: none;
+      background: white;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+    }
+    
+    .follow-up .part {
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    
+    .follow-up .part:first-child {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 0;
+    }
+    
+    .follow-up textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 15px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      border-radius: var(--border-radius);
+      font-family: inherit;
+      font-size: 16px;
+      transition: var(--transition);
+      resize: vertical;
+    }
+    
+    .follow-up textarea:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px var(--primary-light);
+      outline: none;
+    }
+    
+    .toggle-buttons {
+      margin: 10px 0;
+      display: flex;
+      gap: 10px;
+    }
+    
+    .model-answer {
+      background-color: #f8fafb;
+      border-left: 5px solid var(--success-color);
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: var(--transition);
+    }
+    
+    .model-answer:hover {
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transform: translateX(5px);
+    }
+    
+    .model-answer h4 {
+      color: var(--dark-color);
+      margin-top: 0;
+      font-weight: 600;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .tip-box {
+      background-color: #e8f5fb;
+      border-left: 5px solid var(--primary-color);
+      padding: 15px 20px;
+      margin: 15px 0;
+      border-radius: var(--border-radius);
+      position: relative;
+    }
+    
+    .tip-box h5 {
+      color: var(--primary-color);
+      margin: 0 0 10px 0;
+      display: flex;
+      align-items: center;
+    }
+    
+    .tip-box h5::before {
+      content: "💡";
+      margin-right: 8px;
+    }
+    
+    .tip-box ul {
+      margin: 0;
+      padding-left: 25px;
+    }
+    
+    .tip-box li {
+      margin-bottom: 5px;
+    }
+    
+    .tip-box li:last-child {
+      margin-bottom: 0;
+    }
+    
+    .result-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+    
+    .summary-card {
+      flex: 1;
+      min-width: 300px;
+      background-color: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 20px;
+      transition: var(--transition);
+    }
+    
+    .summary-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+    }
+    
+    .summary-title {
+      font-weight: 600;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+      color: var(--dark-color);
+      border-bottom: 2px solid var(--primary-light);
+      padding-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .summary-title::before {
+      content: "📊";
+      margin-right: 8px;
+    }
+    
+    #aoContainer {
+      padding-top: 10px;
+    }
+    
+    #questionCounter {
+      font-weight: 600;
+      color: var(--dark-color);
+      background-color: white;
+      padding: 8px 15px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      header {
+        padding: 20px 15px;
+      }
+      
+      .section, .student-info {
+        padding: 15px;
+      }
+      
+      table {
+        font-size: 14px;
+      }
+      
+      th, td {
+        padding: 10px 6px;
+      }
+      
+      input.score-input {
+        width: 50px;
+        padding: 6px;
+      }
+      
+      .tab-buttons {
+        overflow-x: auto;
+        white-space: nowrap;
+        display: flex;
+        padding-bottom: 5px;
+      }
+      
+      .tab-button {
+        padding: 10px 15px;
+        font-size: 14px;
+      }
+      
+      .grade-display {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 2.5em;
+      }
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary-dark);
+    }
+  </style>
+</head>
+<body>
 
+<div class="container">
+  <!-- Header with title -->
+  <header>
+    <h1>C5 Chemical Changes</h1>
+    <p>AQA GCSE Chemistry Test Analysis</p>
+  </header>
+  
+  <!-- Student Information -->
+  <div class="student-info">
+    <div class="info-group">
+      <label for="studentName">Name:</label>
+      <input type="text" id="studentName" class="info-input" placeholder="Enter your name">
+    </div>
+    <div class="info-group">
+      <label for="studentClass">Class:</label>
+      <input type="text" id="studentClass" class="info-input" placeholder="Enter your class">
+    </div>
+    <div class="info-group">
+      <label for="testDate">Test Date:</label>
+      <input type="date" id="testDate" class="info-input">
+    </div>
+  </div>
+  
+  <!-- Questions and Scores Section -->
+  <div class="section" id="score-entry-section">
+    <h2>Enter Your Scores</h2>
+    <p>Enter the marks you achieved for each question in the test.</p>
+    
+    <table id="specTable">
+      <thead>
+        <tr>
+          <th>Question</th>
+          <th>Specification Point</th>
+          <th>Marks Available</th>
+          <th>Assessment Objective</th>
+          <th>Your Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>01.1</td>
+          <td>C4.2.2 - Identify types of substances (base)</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>01.2</td>
+          <td>C4.2.2 - Types of chemical reactions</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="2" data-ao="AO2">
+          <td>01.3</td>
+          <td>C4.2.2 - Balanced symbol equations</td>
+          <td>2</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.3" data-max="6" data-ao="AO1">
+          <td>01.4</td>
+          <td>C4.2.3 - Practical methods to produce salts</td>
+          <td>6</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="6" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.2" data-max="1" data-ao="AO1">
+          <td>02.1</td>
+          <td>WS 2.2 - Control variables in experiments</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.2" data-max="1" data-ao="AO2">
+          <td>02.2</td>
+          <td>WS 2.2 - Identifying independent variables</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="3" data-ao="AO2">
+          <td>02.3</td>
+          <td>C4.1.2 - Displacement reactions with state symbols</td>
+          <td>3</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="2" data-ao="AO3">
+          <td>02.4</td>
+          <td>C4.1.2 - Order of reactivity from experimental data</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.4" data-max="2" data-ao="AO3">
+          <td>02.5</td>
+          <td>C4.1.4 - Limitations in experimental results</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="WS 2.7" data-max="2" data-ao="AO3">
+          <td>02.6</td>
+          <td>WS 2.7 - Improving experimental accuracy</td>
+          <td>2</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.3" data-max="1" data-ao="AO2">
+          <td>02.7</td>
+          <td>C4.2.3 - Reactivity of metals with acids</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.2" data-max="1" data-ao="AO3">
+          <td>02.8</td>
+          <td>C4.1.2 - Reactivity of group 1 metals</td>
+          <td>1</td>
+          <td>AO3</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.1.4" data-max="2" data-ao="AO2">
+          <td>02.9</td>
+          <td>C4.1.4 - Oxidation and reduction in terms of electrons</td>
+          <td>2</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="2" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.2" data-max="1" data-ao="AO1">
+          <td>03.1</td>
+          <td>C4.2.2 - Definition of alkalis</td>
+          <td>1</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.6" data-max="1" data-ao="AO2">
+          <td>03.2</td>
+          <td>C4.2.6 - pH scale and concentration of hydrogen ions</td>
+          <td>1</td>
+          <td>AO2</td>
+          <td><input type="number" min="0" max="1" step="any" class="score-input" /></td>
+        </tr>
+        <tr data-spec-code="C4.2.6" data-max="3" data-ao="AO1">
+          <td>03.3</td>
+          <td>C4.2.6 - Strength of acids and ionisation</td>
+          <td>3</td>
+          <td>AO1</td>
+          <td><input type="number" min="0" max="3" step="any" class="score-input" /></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <button id="analyseButton" onclick="analyseResults()">Analyse Results</button>
+  </div>
+  
+  <!-- Results Section (Initially Hidden) -->
+  <div class="section hidden" id="results-section">
+    <h2>Your Results Analysis</h2>
+    
+          <div class="result-summary">
+      <div class="summary-card">
+        <div class="summary-title">Overall Performance</div>
+        <div id="totalScore"></div>
+        <div id="gradeContainer" class="grade-display-container">
+          <p>Your grade:</p>
+          <div class="grade-display" id="gradeDisplay">-</div>
+          <p id="gradePercentage" class="grade-percentage"></p>
+        </div>
+      </div>
+      
+      <div class="summary-card">
+        <div class="summary-title">Assessment Objective Performance</div>
+        <div id="aoContainer"></div>
+      </div>
+    </div>
+    
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" onclick="openTab(event, 'topicPerformance')">Topic Performance</button>
+        <button class="tab-button" onclick="openTab(event, 'revisionTab')">Revision Recommendations</button>
+        <button class="tab-button" onclick="openTab(event, 'followUpTab')">Follow-Up Questions</button>
+        <button class="tab-button" onclick="openTab(event, 'modelAnswersTab')">Model Answers</button>
+      </div>
+      
+      <!-- Topic Performance Tab -->
+      <div id="topicPerformance" class="tab-content active">
+        <h3>Topic Performance</h3>
+        <p>The table below shows your performance across different topic areas, from strongest to weakest.</p>
+        <div id="summaryContainer"></div>
+      </div>
+      
+      <!-- Revision Recommendations Tab -->
+      <div id="revisionTab" class="tab-content">
+        <h3>Revision Recommendations</h3>
+        <p>Based on your test performance, here are some targeted revision recommendations:</p>
+        <div id="recommendationsContainer"></div>
+      </div>
+      
+      <!-- Follow-Up Questions Tab -->
+      <div id="followUpTab" class="tab-content">
+        <h3>Follow-Up Practice Questions</h3>
+        <p>Work through these practice questions to improve your understanding of topics you found challenging.</p>
+        <div id="followUpContainer"></div>
+        <div id="followUpNavigation" class="follow-up-controls hidden">
+          <button id="prevQuestion" onclick="showPreviousQuestion()" class="secondary">Previous Question</button>
+          <span id="questionCounter">Question 1 of 5</span>
+          <button id="nextQuestion" onclick="showNextQuestion()">Next Question</button>
+        </div>
+      </div>
+      
+      <!-- Model Answers Tab -->
+      <div id="modelAnswersTab" class="tab-content">
+        <h3>Model Answers & Tips</h3>
+        <p>Here are model answers for each question in the test, with tips to help you improve.</p>
+        <div id="modelAnswersContainer"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Mapping of specification codes to subject content descriptors
+    const specDescriptors = {
+      "C4.2.2": "Acids, bases, neutralisation reactions, and definition of alkalis",
+      "C4.2.3": "Practical methods to produce salts and reactivity of metals with acids",
+      "WS 2.2": "Variables in experiments and identification of independent variables",
+      "C4.1.2": "Displacement reactions, order of reactivity, and reactivity of group 1 metals",
+      "C4.1.4": "Limitations in experimental results and oxidation-reduction reactions",
+      "WS 2.7": "Improving experimental accuracy",
+      "C4.2.6": "pH scale, hydrogen ion concentration, and strength of acids"
+    };
+    
+    // Revision recommendations based on spec codes
+    const revisionRecommendations = {
+      "C4.2.2": {
+        title: "Acids, Bases and Neutralisation",
+        content: "Focus on understanding the properties of acids and bases, neutralisation reactions, and the formation of salts. Practice writing balanced symbol equations for neutralisation reactions and understand the role of indicators in these reactions.",
+        resources: [
+          "Review pages 56-59 in your textbook",
+          "Watch 'Acids and Bases Explained' video on the school VLE",
+          "Complete the online quiz on neutralisation reactions"
+        ]
+      },
+      "C4.2.3": {
+        title: "Salt Preparation Methods",
+        content: "Review practical methods for preparing soluble and insoluble salts. Ensure you understand the full process from neutralisation to crystallisation, including titration procedures.",
+        resources: [
+          "Review the practical worksheets from class on salt preparation",
+          "Practice the titration calculations in your revision workbook",
+          "Watch the demonstration video on salt crystallisation"
+        ]
+      },
+      "C4.1.2": {
+        title: "Reactivity Series and Displacement",
+        content: "Strengthen your understanding of the reactivity series and displacement reactions. Be able to predict reactions based on metal reactivity and write balanced equations for these reactions.",
+        resources: [
+          "Create flashcards for the reactivity series",
+          "Practice predicting reaction outcomes based on the reactivity series",
+          "Complete the displacement reactions worksheet"
+        ]
+      },
+      "C4.1.4": {
+        title: "Oxidation and Reduction (Redox)",
+        content: "Focus on understanding oxidation and reduction in terms of electron transfer. Practice identifying which substances are oxidized and which are reduced in reactions.",
+        resources: [
+          "Review the redox section in your revision guide",
+          "Complete the electron transfer diagrams worksheet",
+          "Try the online interactive on identifying redox reactions"
+        ]
+      },
+      "WS 2.2": {
+        title: "Variables in Scientific Investigations",
+        content: "Ensure you can identify independent, dependent, and control variables in experiments. Practice designing investigations with appropriate variables.",
+        resources: [
+          "Review the 'Planning Investigations' section in your workbook",
+          "Complete the variables identification exercises",
+          "Watch the 'Scientific Method' tutorial on the school VLE"
+        ]
+      },
+      "WS 2.7": {
+        title: "Improving Experimental Accuracy",
+        content: "Focus on understanding how to improve the accuracy, precision, and reliability of experimental results. Know the difference between random and systematic errors.",
+        resources: [
+          "Review the 'Experimental Techniques' notes",
+          "Practice identifying sources of error in example experiments",
+          "Complete the data analysis worksheet"
+        ]
+      },
+      "C4.2.6": {
+        title: "pH and Acid Strength",
+        content: "Review the relationship between pH, hydrogen ion concentration, and acid strength. Ensure you understand the difference between strong and weak acids in terms of ionization.",
+        resources: [
+          "Study the pH and acid strength diagrams in your textbook",
+          "Complete the acid strength calculations worksheet",
+          "Try the online pH scale simulator"
+        ]
+      }
+    };
+    
+    // Follow-Up Data with introductory context
+    const followUpData = {
+      "C4.2.2": {
+        intro: "A student wants to make sodium sulfate crystals using sulfuric acid and sodium hydroxide.",
+        parts: {
+          a: {
+            question: "Write the balanced symbol equation for the reaction.",
+            answer: "H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O",
+            hint: "Recall the neutralisation reaction between sulfuric acid and sodium hydroxide. Write the correct chemical formulas and ensure the equation is balanced (same number of each atom on both sides)."
+          },
+          b: {
+            question: "Explain why an indicator is used in this reaction.",
+            answer: "An indicator is used because both the acid and the base are colourless; it changes colour at the endpoint of the titration, indicating that neutralisation is complete.",
+            hint: "Consider how, in a colourless solution, it is difficult to identify the end-point. An indicator provides a visual cue when the acid has been neutralised."
+          },
+          c: {
+            question: "Describe how the student could obtain pure, dry crystals of sodium sulfate from the reaction mixture.",
+            answer: "The student should titrate with an indicator to determine the endpoint, then repeat the reaction without the indicator using the correct volumes, gently heat the solution to evaporate water, allow it to cool for crystallisation, and finally filter and dry the crystals.",
+            hint: "Review the process of crystallisation: titration for precision, evaporation to remove excess water, cooling for crystal formation, and filtration/drying to purify the crystals."
+          }
+        }
+      },
+      "C4.2.3": {
+        intro: "A student reacts magnesium carbonate with hydrochloric acid to make magnesium chloride.",
+        parts: {
+          a: {
+            question: "Write a word equation for the reaction.",
+            answer: "Magnesium carbonate + Hydrochloric acid → Magnesium chloride + Water + Carbon dioxide",
+            hint: "List the reactants and products in words. Remember that carbonate reactions yield water and carbon dioxide."
+          },
+          b: {
+            question: "What gas is produced, and how could you test for it?",
+            answer: "Carbon dioxide (CO₂) is produced; it can be tested by passing the gas through limewater, which turns cloudy due to the formation of calcium carbonate.",
+            hint: "Carbonate-acid reactions produce CO₂. The classic test is to bubble the gas through limewater and observe if it turns milky."
+          },
+          c: {
+            question: "Explain why excess magnesium carbonate is added and describe the steps to obtain dry magnesium chloride crystals.",
+            answer: "Excess magnesium carbonate ensures that all the hydrochloric acid reacts. The procedure involves filtering out unreacted carbonate, gently heating the filtrate to evaporate water, allowing crystallisation, and then filtering and drying the crystals.",
+            hint: "Consider why complete reaction is important to avoid residual acid. List the purification steps: filtration, evaporation, crystallisation, and drying."
+          }
+        }
+      },
+      "C4.1.4": {
+        intro: "A student adds a piece of magnesium to solutions of different metal sulfates and records the results.",
+        parts: {
+          a: {
+            question: "Explain why a reaction occurs between magnesium and copper sulfate but not with magnesium and magnesium sulfate.",
+            answer: "Magnesium is more reactive than copper, so it displaces copper from copper sulfate; however, magnesium cannot displace itself from magnesium sulfate as it has the same reactivity.",
+            hint: "Review the reactivity series. A metal will only displace another metal if it is more reactive. Compare the positions of magnesium and copper."
+          },
+          b: {
+            question: "Write a balanced symbol equation for the reaction between magnesium and copper sulfate (include state symbols).",
+            answer: "Mg(s) + CuSO₄(aq) → Cu(s) + MgSO₄(aq)",
+            hint: "Ensure you include the physical states: (s) for solids and (aq) for aqueous solutions. Balance the equation correctly."
+          },
+          c: {
+            question: "Predict what would happen if iron was added to copper sulfate solution, and explain your answer.",
+            answer: "Iron would displace copper from copper sulfate, forming iron sulfate and depositing copper. This happens because iron is more reactive than copper in the reactivity series.",
+            hint: "Consider the reactivity of iron relative to copper. If iron is more reactive than copper, it will replace it in the solution."
+          }
+        }
+      },
+      "C4.2.6": {
+        intro: "A student measures the pH of two acid solutions: Hydrochloric acid (pH = 1) and ethanoic acid (pH = 3).",
+        parts: {
+          a: {
+            question: "Explain why the pH values differ despite both acids having the same concentration.",
+            answer: "HCl is a strong acid that completely ionizes, producing a high concentration of H⁺ ions (pH 1), while ethanoic acid is a weak acid that partially ionizes, resulting in a higher pH (pH 3).",
+            hint: "Recall the difference in ionization between strong and weak acids. Full ionization of HCl yields more hydrogen ions compared to the partial ionization of ethanoic acid."
+          },
+          b: {
+            question: "Which acid is strong and which is weak?",
+            answer: "Hydrochloric acid (HCl) is strong; ethanoic acid (CH₃COOH) is weak.",
+            hint: "Based on the ionization properties, determine which acid releases more H⁺ ions in solution."
+          },
+          c: {
+            question: "Predict what happens to the pH when ethanoic acid is diluted with distilled water and explain why.",
+            answer: "Dilution decreases the concentration of H⁺ ions, so the pH increases (becomes less acidic).",
+            hint: "Consider that lowering the concentration of the acid (and thus the H⁺ ions) shifts the pH closer to neutral."
+          }
+        }
+      },
+      "WS 2.2": {
+        intro: "A student investigates how temperature affects the rate of reaction between sodium thiosulfate and hydrochloric acid.",
+        parts: {
+          a: {
+            question: "Identify the independent variable, the dependent variable, and one control variable.",
+            answer: "Independent variable: Temperature; Dependent variable: Time taken for the solution to turn cloudy; Control variable: Volume/concentration of reactants.",
+            hint: "Differentiate between what is changed, what is measured, and what must remain constant in the experiment."
+          },
+          b: {
+            question: "Explain why repeating the experiment and calculating a mean improves accuracy.",
+            answer: "Repeating the experiment reduces random errors and increases the reliability and accuracy of the results by averaging out anomalies.",
+            hint: "Consider how multiple trials can minimize the impact of outliers and improve overall accuracy."
+          },
+          c: {
+            question: "Describe how the student could ensure a fair test in this investigation.",
+            answer: "The student should keep all conditions constant except the independent variable (temperature), use the same equipment and procedure for every trial, and control any extraneous variables.",
+            hint: "Focus on the importance of standardization and control in experimental design."
+          }
+        }
+      }
+    };
+    
+    // Model answers for test questions with tips
+    const modelAnswers = [
+      {
+        question: "01.1 - What type of substance is copper oxide?",
+        answer: "Copper oxide is a base (option D).",
+        tips: [
+          "Remember: A base is a substance that can neutralize an acid to form a salt and water",
+          "Metal oxides like copper oxide are bases, even though they are insoluble",
+          "Only soluble bases are called alkalis",
+          "Don't confuse 'insoluble' with 'acid' - many bases are insoluble"
+        ]
+      },
+      {
+        question: "01.2 - Name the type of reaction taking place when copper oxide reacts with dilute hydrochloric acid.",
+        answer: "Neutralization reaction",
+        tips: [
+          "This is a key reaction type: base + acid → salt + water",
+          "Even though copper oxide is insoluble, it still acts as a base",
+          "Always use the term 'neutralization' when an acid reacts with a base",
+          "Spelling is important: use 'neutralisation' or 'neutralization'"
+        ]
+      },
+      {
+        question: "01.3 - Write a balanced symbol equation for the reaction between copper oxide and hydrochloric acid.",
+        answer: "CuO + 2HCl → CuCl₂ + H₂O",
+        tips: [
+          "Start by writing the correct formulas for all reactants and products",
+          "Remember copper forms Cu²⁺ ions, so copper chloride is CuCl₂",
+          "Count atoms on both sides to ensure the equation is balanced",
+          "Notice that 2 HCl are needed to balance with one CuO",
+          "You can include state symbols (s), (aq), etc. for extra credit, but they weren't required here"
+        ]
+      },
+      {
+        question: "01.4 - Describe how you could produce pure dry crystals of copper chloride from copper oxide and dilute hydrochloric acid.",
+        answer: "1. Add excess copper oxide to dilute hydrochloric acid in a beaker\n2. Warm the mixture gently and stir until no more copper oxide reacts (some will remain undissolved)\n3. Filter the mixture to remove the excess copper oxide\n4. Pour the filtrate (copper chloride solution) into an evaporating dish\n5. Heat gently to evaporate some of the water until crystals start to form\n6. Leave to cool and allow crystals to form\n7. Filter to collect the crystals\n8. Pat dry between filter papers or leave to dry in a warm place",
+        tips: [
+          "Use excess copper oxide to ensure all the acid reacts",
+          "Include all key steps in a logical order: reaction, filtration, evaporation, crystallization, and drying",
+          "Mention gentle heating to avoid decomposition",
+          "For full marks, include practical details like using an evaporating dish and filter paper",
+          "Use the correct technical terms: filtrate, excess, evaporate",
+          "Remember that copper chloride solution is blue, but this isn't necessary to mention"
+        ]
+      },
+      {
+        question: "02.1 - Give one variable the student should control in the metal reactivity investigation.",
+        answer: "Volume/concentration of copper sulfate solution OR mass/surface area/particle size of metal powder OR initial temperature of the solution",
+        tips: [
+          "A control variable is something you keep the same for a fair test",
+          "Choose something that would affect the temperature change if it varied",
+          "Common examples include: volume of solution, concentration, mass of reactants, surface area",
+          "Only ONE variable was required here - don't waste time listing multiple variables"
+        ]
+      },
+      {
+        question: "02.2 - Name the independent variable in the student's investigation.",
+        answer: "The type of metal powder used",
+        tips: [
+          "The independent variable is what you deliberately change",
+          "In this experiment, different metals are being tested for reactivity",
+          "Be specific - 'metal' alone is not sufficient, specify 'type of metal' or 'identity of metal'"
+        ]
+      },
+      {
+        question: "02.3 - Complete the equation for the reaction between zinc and copper sulfate, including state symbols.",
+        answer: "Zn(s) + CuSO₄(aq) → Cu(s) + ZnSO₄(aq)",
+        tips: [
+          "You must include ALL state symbols correctly for full marks",
+          "Solid metals are (s), solutions are (aq)",
+          "This is a displacement reaction because zinc is more reactive than copper",
+          "The formula for zinc sulfate is ZnSO₄ (zinc forms Zn²⁺ ions)",
+          "Make sure the equation is balanced by checking atom counts on both sides"
+        ]
+      },
+      {
+        question: "02.4 - Use these results to place the metals in Table 1 in an estimated order of reactivity.",
+        answer: "Most reactive to least reactive: magnesium > zinc > nickel > copper/silver/tungsten",
+        tips: [
+          "Higher temperature rise indicates greater reactivity",
+          "Arrange metals from highest temperature rise to lowest",
+          "Metals with 0.0°C temperature rise (copper, silver, tungsten) can be grouped together as they didn't react",
+          "You could also write it as: Mg > Zn > Ni > Cu = Ag = W",
+          "Both formats are acceptable as long as the order is correct"
+        ]
+      },
+      {
+        question: "02.5 - Explain why it is not possible to be certain about the order of reactivity of the metals in Table 1.",
+        answer: "The metals that showed no temperature rise (0.0°C) cannot be distinguished in terms of reactivity. Also, the experiment only tests reactivity with copper sulfate, which doesn't give information about metals less reactive than copper.",
+        tips: [
+          "Identify limitations in the experimental design",
+          "Point out that metals with 0.0°C temperature rise might still have different reactivities that this experiment can't detect",
+          "Explain that this experiment only reveals if metals are more reactive than copper, not how they compare to each other if less reactive",
+          "For full marks, give two distinct limitations"
+        ]
+      },
+      {
+        question: "02.6 - Suggest how you could gain more information to improve your order of reactivity.",
+        answer: "Test the metals with different metal salt solutions (e.g., silver nitrate). Also, use other methods to test reactivity such as reactions with water, steam or acids.",
+        tips: [
+          "Suggest using different metal salts to establish reactivity between metals that don't react with copper sulfate",
+          "Mention additional tests like reactions with acids, water, or oxygen",
+          "Be specific about what additional information would be gained",
+          "For full marks, give at least two distinct suggestions"
+        ]
+      },
+      {
+        question: "02.7 - Give a reason why copper chloride cannot be produced by reacting copper with hydrochloric acid.",
+        answer: "Copper is below hydrogen in the reactivity series, so it cannot displace hydrogen from acids.",
+        tips: [
+          "Link your answer to the reactivity series",
+          "Only metals above hydrogen in the reactivity series will react with acids",
+          "You could also state that copper is not reactive enough to react with acids",
+          "Avoid vague answers like 'copper doesn't react with acids' without explanation"
+        ]
+      },
+      {
+        question: "02.8 - Give a reason why it is not safe to produce potassium chloride by reacting potassium with hydrochloric acid.",
+        answer: "Potassium is very reactive and would react violently/explosively with hydrochloric acid, creating a safety hazard.",
+        tips: [
+          "Focus on the extreme reactivity of potassium as a Group 1 metal",
+          "Use terms like 'violent', 'explosive', or 'extremely exothermic' to describe the reaction",
+          "Link the safety concern directly to the high reactivity",
+          "Mention hydrogen gas production (which is flammable) for additional detail"
+        ]
+      },
+      {
+        question: "02.9 - Explain, in terms of electrons, which species is oxidised and which is reduced in the reaction.",
+        answer: "Magnesium is oxidised because it loses electrons to form Mg²⁺. Hydrogen ions (H⁺) are reduced because they gain electrons to form H₂.",
+        tips: [
+          "Always define oxidation as loss of electrons and reduction as gain of electrons",
+          "Identify which specific chemical species is oxidized and which is reduced",
+          "Use the ionic equation provided to track electron transfer",
+          "For full marks, you must explain both oxidation AND reduction correctly",
+          "Remember OIL RIG: Oxidation Is Loss, Reduction Is Gain of electrons"
+        ]
+      },
+      {
+        question: "03.1 - What is an alkali?",
+        answer: "An alkali is a soluble base (option D).",
+        tips: [
+          "Remember the key distinction: all alkalis are bases, but not all bases are alkalis",
+          "The defining characteristic is solubility in water",
+          "Common alkalis include sodium hydroxide, potassium hydroxide, and ammonia",
+          "Alkalis produce hydroxide ions (OH⁻) when dissolved in water"
+        ]
+      },
+      {
+        question: "03.2 - Which estimate of hydrogen ion concentration for ethanoic acid is approximately correct?",
+        answer: "0.001 mol/dm³ (option A)",
+        tips: [
+          "Remember: pH = -log[H⁺]",
+          "For pH 2.9, the [H⁺] is approximately 10⁻³ mol/dm³ or 0.001 mol/dm³",
+          "Weak acids like ethanoic acid only partially ionize, so [H⁺] will be much less than the acid concentration",
+          "For each pH unit difference, the H⁺ concentration changes by a factor of 10"
+        ]
+      },
+      {
+        question: "03.3 - Explain why the solution of hydrochloric acid has a different pH to the solution of ethanoic acid.",
+        answer: "Hydrochloric acid is a strong acid that completely ionizes in solution, releasing all its hydrogen ions (H⁺). Ethanoic acid is a weak acid that only partially ionizes, releasing fewer hydrogen ions. This means hydrochloric acid has a higher concentration of H⁺ ions in solution, resulting in a lower pH (pH 1.0) compared to ethanoic acid (pH 2.9), despite both having the same concentration.",
+        tips: [
+          "Compare strong acids (complete ionization) vs. weak acids (partial ionization)",
+          "Explain how ionization affects hydrogen ion concentration",
+          "Link hydrogen ion concentration to pH values",
+          "For full marks, mention all three key points: complete vs partial ionization, different H⁺ concentrations, and the resulting pH difference",
+          "Use the specific pH values from the question as evidence"
+        ]
+      }
+    ];
+    
+    // Global variables for follow-up questions navigation
+    let currentFollowUpIndex = 0;
+    let followUpArray = [];
+    
+    // Function to interpolate a color between red (low) and green (high)
+    function getPerformanceColor(percentage) {
+      // For gradient: red (0%) -> amber (50%) -> green (100%)
+      let r, g;
+      if (percentage < 50) {
+        // Red to amber
+        r = 255;
+        g = Math.round(200 + (percentage / 50) * 55); // 200 -> 255
+      } else {
+        // Amber to green
+        r = Math.round(255 - ((percentage - 50) / 50) * 155); // 255 -> 100
+        g = 255;
+      }
+      const b = 100;
+      return `rgb(${r},${g},${b})`;
+    }
+    
+    // Function to determine grade based on percentage
+    function getGrade(percentage) {
+      if (percentage >= 90) return 9;
+      if (percentage >= 80) return 8;
+      if (percentage >= 70) return 7;
+      if (percentage >= 60) return 6;
+      if (percentage >= 50) return 5;
+      if (percentage >= 40) return 4;
+      if (percentage >= 30) return 3;
+      if (percentage >= 20) return 2;
+      if (percentage >= 10) return 1;
+      return "U";
+    }
+    
+    // Function to get color for grade display
+    function getGradeColor(grade) {
+      if (grade >= 7) return "linear-gradient(135deg, #43a047, #2e7d32)"; // Green for 7-9
+      if (grade >= 4) return "linear-gradient(135deg, #fb8c00, #ef6c00)"; // Amber for 4-6
+      return "linear-gradient(135deg, #e53935, #c62828)"; // Red for 1-3 and U
+    }
+    
+    // Function to open tab content
+    function openTab(evt, tabName) {
+      // Hide all tab content
+      const tabContent = document.getElementsByClassName("tab-content");
+      for (let i = 0; i < tabContent.length; i++) {
+        tabContent[i].classList.remove("active");
+      }
+      
+      // Remove active class from all tab buttons
+      const tabButtons = document.getElementsByClassName("tab-button");
+      for (let i = 0; i < tabButtons.length; i++) {
+        tabButtons[i].classList.remove("active");
+      }
+      
+      // Show the selected tab content and mark button as active
+      document.getElementById(tabName).classList.add("active");
+      evt.currentTarget.classList.add("active");
+      
+      // Special handling for follow-up questions tab
+      if (tabName === "followUpTab" && followUpArray.length > 0) {
+        showFollowUpQuestion(currentFollowUpIndex);
+      }
+    }
+    
+    // Main function to analyse results
+    function analyseResults() {
+      // --- Calculate Total Score ---
+      let totalObtained = 0;
+      let totalPossible = 0;
+      
+      // --- Process Specification Performance ---
+      const performance = {};
+      const rows = document.querySelectorAll("#specTable tbody tr");
+      rows.forEach(row => {
+        const specCode = row.getAttribute("data-spec-code");
+        const maxMark = parseFloat(row.getAttribute("data-max"));
+        const scoreInput = row.querySelector("input.score-input");
+        const score = parseFloat(scoreInput.value) || 0;
+        
+        totalObtained += score;
+        totalPossible += maxMark;
+        
+        if (!performance[specCode]) {
+          performance[specCode] = { obtained: 0, total: 0 };
+        }
+        performance[specCode].obtained += score;
+        performance[specCode].total += maxMark;
+      });
+      
+      // Calculate total percentage
+      const totalPercentage = (totalObtained / totalPossible) * 100;
+      
+      // Display total score
+      document.getElementById("totalScore").innerHTML = `
+        <p>You scored <strong>${totalObtained}</strong> out of <strong>${totalPossible}</strong> marks.</p>
+        <p>Overall percentage: <strong>${totalPercentage.toFixed(1)}%</strong></p>
+      `;
+      
+      // Display grade
+      const grade = getGrade(totalPercentage);
+      const gradeDisplay = document.getElementById("gradeDisplay");
+      gradeDisplay.textContent = grade;
+      gradeDisplay.style.background = getGradeColor(grade);
+      document.getElementById("gradePercentage").textContent = `${totalPercentage.toFixed(1)}%`;
+      
+      // Build an array for specification performance with percentages
+      const performanceArray = [];
+      for (let spec in performance) {
+        const data = performance[spec];
+        const percentage = (data.obtained / data.total) * 100;
+        performanceArray.push({ 
+          specCode: spec, 
+          percentage: percentage,
+          obtained: data.obtained,
+          total: data.total
+        });
+      }
+      
+      // --- Display Specification Performance Summary ---
+      // Sorted descending (highest percentage first)
+      performanceArray.sort((a, b) => b.percentage - a.percentage);
+      const summaryContainer = document.getElementById("summaryContainer");
+      summaryContainer.innerHTML = "";
+      
+      performanceArray.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "summary-row";
+        div.style.borderLeftColor = getPerformanceColor(item.percentage);
+        const descriptor = specDescriptors[item.specCode] || "";
+        
+        div.innerHTML = `
+          <div class="progress-container">
+            <div class="progress-label">${item.specCode}</div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${item.percentage}%; background-color: ${getPerformanceColor(item.percentage)};"></div>
+            </div>
+            <div class="progress-text">${item.percentage.toFixed(0)}%</div>
+          </div>
+          <div><small>${descriptor}</small></div>
+        `;
+        summaryContainer.appendChild(div);
+      });
+      
+      // --- Process Assessment Objective (AO) Performance ---
+      const aoPerformance = {};
+      rows.forEach(row => {
+        const ao = row.getAttribute("data-ao");
+        const maxMark = parseFloat(row.getAttribute("data-max"));
+        const scoreInput = row.querySelector("input.score-input");
+        const score = parseFloat(scoreInput.value) || 0;
+        
+        if (!aoPerformance[ao]) {
+          aoPerformance[ao] = { obtained: 0, total: 0 };
+        }
+        aoPerformance[ao].obtained += score;
+        aoPerformance[ao].total += maxMark;
+      });
+      
+      // Build an array for AO performance in the order AO1, AO2, AO3
+      const aoOrder = ["AO1", "AO2", "AO3"];
+      const aoArray = [];
+      aoOrder.forEach(ao => {
+        if (aoPerformance[ao]) {
+          const data = aoPerformance[ao];
+          const percentage = (data.obtained / data.total) * 100;
+          aoArray.push({ ao: ao, percentage: percentage });
+        }
+      });
+      
+      // --- Display AO Performance Summary ---
+      const aoContainer = document.getElementById("aoContainer");
+      aoContainer.innerHTML = "";
+      
+      aoArray.forEach(item => {
+        // Descriptors for AO
+        let aoDescriptor = "";
+        if(item.ao === "AO1") { aoDescriptor = "Recall and Knowledge"; }
+        else if(item.ao === "AO2") { aoDescriptor = "Application and Understanding"; }
+        else if(item.ao === "AO3") { aoDescriptor = "Analysis and Evaluation"; }
+        
+        const aoDiv = document.createElement("div");
+        aoDiv.className = "progress-container";
+        aoDiv.innerHTML = `
+          <div class="progress-label">${item.ao}</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${item.percentage}%;"></div>
+          </div>
+          <div class="progress-text">${item.percentage.toFixed(0)}%</div>
+        `;
+        aoContainer.appendChild(aoDiv);
+        
+        const descriptorDiv = document.createElement("div");
+        descriptorDiv.innerHTML = `<small>${aoDescriptor}</small>`;
+        aoContainer.appendChild(descriptorDiv);
+        
+        // Add some spacing
+        const spacerDiv = document.createElement("div");
+        spacerDiv.style.height = "10px";
+        aoContainer.appendChild(spacerDiv);
+      });
+      
+      // --- Generate Revision Recommendations ---
+      // Sort in ascending order (weakest topics first)
+      const recommendationsArray = performanceArray.slice().sort((a, b) => a.percentage - b.percentage);
+      const recommendationsContainer = document.getElementById("recommendationsContainer");
+      recommendationsContainer.innerHTML = "";
+      
+      // Take the weakest 3 topics (or all if less than 3)
+      const topRecommendations = recommendationsArray.slice(0, Math.min(3, recommendationsArray.length));
+      
+      topRecommendations.forEach(item => {
+        if (revisionRecommendations[item.specCode]) {
+          const recData = revisionRecommendations[item.specCode];
+          const div = document.createElement("div");
+          div.className = "recommendation";
+          
+          let resourcesList = "";
+          recData.resources.forEach(resource => {
+            resourcesList += `<li>${resource}</li>`;
+          });
+          
+          div.innerHTML = `
+            <h4>${recData.title} (${item.specCode}: ${item.percentage.toFixed(0)}%)</h4>
+            <p>${recData.content}</p>
+            <h5>Suggested Resources:</h5>
+            <ul>${resourcesList}</ul>
+          `;
+          
+          recommendationsContainer.appendChild(div);
+        }
+      });
+      
+      // --- Setup Follow-Up Questions ---
+      // Store the weakest-to-strongest sorted array for follow-up questions
+      followUpArray = recommendationsArray.filter(item => followUpData[item.specCode]).map(item => item.specCode);
+      
+      if (followUpArray.length > 0) {
+        // Reset to first question
+        currentFollowUpIndex = 0;
+        
+        // Setup navigation controls
+        const followUpNavigation = document.getElementById("followUpNavigation");
+        followUpNavigation.classList.remove("hidden");
+        
+        // Show first question
+        showFollowUpQuestion(currentFollowUpIndex);
+      }
+      
+      // --- Set up Model Answers ---
+      const modelAnswersContainer = document.getElementById("modelAnswersContainer");
+      modelAnswersContainer.innerHTML = "";
+      
+      modelAnswers.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "model-answer";
+        
+        let tipsList = "";
+        item.tips.forEach(tip => {
+          tipsList += `<li>${tip}</li>`;
+        });
+        
+        div.innerHTML = `
+          <h4>${item.question}</h4>
+          <p><strong>Model Answer:</strong> ${item.answer}</p>
+          <div class="tip-box">
+            <h5>Examiner Tips:</h5>
+            <ul>${tipsList}</ul>
+          </div>
+        `;
+        
+        modelAnswersContainer.appendChild(div);
+      });
+      
+      // Show the results section
+      document.getElementById("results-section").classList.remove("hidden");
+      
+      // Scroll to results
+      document.getElementById("results-section").scrollIntoView({ behavior: "smooth" });
+    }
+    
+    // Function to show a specific follow-up question
+    function showFollowUpQuestion(index) {
+      if (index < 0 || index >= followUpArray.length) return;
+      
+      const specCode = followUpArray[index];
+      const followUpContainer = document.getElementById("followUpContainer");
+      followUpContainer.innerHTML = "";
+      
+      if (followUpData[specCode]) {
+        const data = followUpData[specCode];
+        
+        // Create a container for this follow-up question
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "follow-up";
+        
+        let innerHTML = `<h4>${specCode}</h4>`;
+        innerHTML += `<p><em>${data.intro}</em></p>`;
+        
+        // For each part (a, b, c) generate a sub-section
+        const parts = data.parts;
+        for (let part in parts) {
+          const partData = parts[part];
+          innerHTML += `<div class="part">
+            <p><strong>${part})</strong> ${partData.question}</p>
+            <textarea placeholder="Type your answer here..."></textarea>
+            <div class="toggle-buttons">
+              <button onclick="toggleSubDisplay(this, 'hint', '${specCode}', '${part}')">Show Hint</button>
+              <button onclick="toggleSubDisplay(this, 'answer', '${specCode}', '${part}')">Show Answer</button>
+            </div>
+            <div id="sub-hint-${specCode}-${part}" class="hidden">${partData.hint}</div>
+            <div id="sub-answer-${specCode}-${part}" class="hidden">${partData.answer}</div>
+          </div>`;
+        }
+        
+        questionDiv.innerHTML = innerHTML;
+        followUpContainer.appendChild(questionDiv);
+        
+        // Update the question counter
+        document.getElementById("questionCounter").textContent = `Question ${index + 1} of ${followUpArray.length}`;
+        
+        // Update button states
+        document.getElementById("prevQuestion").disabled = index === 0;
+        document.getElementById("nextQuestion").disabled = index === followUpArray.length - 1;
+      }
+    }
+    
+    // Function to show the next follow-up question
+    function showNextQuestion() {
+      if (currentFollowUpIndex < followUpArray.length - 1) {
+        currentFollowUpIndex++;
+        showFollowUpQuestion(currentFollowUpIndex);
+      }
+    }
+    
+    // Function to show the previous follow-up question
+    function showPreviousQuestion() {
+      if (currentFollowUpIndex > 0) {
+        currentFollowUpIndex--;
+        showFollowUpQuestion(currentFollowUpIndex);
+      }
+    }
+    
+    // Toggle function for sub-question hint/answer display
+    function toggleSubDisplay(button, type, spec, part) {
+      const element = document.getElementById(`sub-${type}-${spec}-${part}`);
+      element.classList.toggle("hidden");
+      
+      if (element.classList.contains("hidden")) {
+        button.textContent = type === "hint" ? "Show Hint" : "Show Answer";
+      } else {
+        button.textContent = type === "hint" ? "Hide Hint" : "Hide Answer";
+      }
+    }
+    
+    // Initialize date field with current date
+    document.getElementById("testDate").valueAsDate = new Date();
+  </script>
+</body>
+</html>
