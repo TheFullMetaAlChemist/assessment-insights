@@ -80,6 +80,7 @@
     <h1>Chemistry Test Selection</h1>
     <p>Please choose a test from the available option:</p>
     <button onclick="selectTest('reactivity-trends')">Reactivity Trends</button>
+    <button onclick="selectTest('chemical-changes')">Chemical Changes</button>
   </div>
 
   <script>
@@ -88,6 +89,8 @@
       localStorage.setItem('selectedTest', testId);
       // Redirect to the reactivity trends test page in the "chemistry-tests" subfolder.
       window.location.href = 'chemistry-tests/reactivity-trends.html';
+       // Redirect to the chemical changes test page in the "chemistry-tests" subfolder.
+      window.location.href = 'chemistry-tests/chemical-changes.html';
     }
   </script>
 
